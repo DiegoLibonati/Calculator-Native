@@ -6,13 +6,15 @@ const initialValues = {
   firstValue: null,
   operation: null,
   screen: "0",
+  comma: false,
 };
 
 export const CalculatorProvider = ({ children }) => {
   const [values, setValues] = useState(initialValues);
 
   const handleScreen = (value) => {
-    if (values.screen.includes(".") && value === ".") return;
+    if (values.comma && value === ".") return;
+    if (value === ".") values.comma = true;
 
     if (
       (values.screen === "0" || (values.firstValue && !values.operation)) &&
@@ -29,6 +31,7 @@ export const CalculatorProvider = ({ children }) => {
   };
 
   const handleOperation = (value) => {
+    values.comma = false;
     if (values.operation)
       return setValues({
         ...values,
