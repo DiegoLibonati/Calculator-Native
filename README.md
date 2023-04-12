@@ -1,6 +1,73 @@
 # Calculator-Native-App
-<<<<<<< HEAD
-In progress..
-=======
-This application is made with react native. It is a calculator that allows to change the theme from light to dark, add, subtract, multiply, divide, change from positive to negative and vice versa, return to 0, get the percentage etc. It is my first native application. The first of hopefully many :D
->>>>>>> 07e6dcda007beb314f94b83aea6f37e9038b4de6
+
+## Getting Started
+
+1. Clone the repository on your computer using: `git clone URL`.
+2. Go to the APP directory.
+3. Install dependencies using `npm install`.
+4. If you have expo and an Android simulator installed, you can run the app with the command `npm start` and select the desired option.
+
+- If you don't have expo and an Android simulator installed, search for a tutorial on YouTube.
+
+## Description
+
+This application is made with react native. It is a calculator that allows to:
+
+- Change the theme from light to dark
+- Add
+- Subtract
+- Multiply
+- Divide
+- Change from positive to negative and vice versa
+- Return to 0
+- Get the percentage
+
+It is my first native application. The first of hopefully many :D
+
+## Technologies used
+
+1. React Native
+2. CSS
+3. Expo
+
+## Libraries used
+
+1. Expo
+
+## Portfolio Link
+
+https://diegolibonati.github.io/DiegoLibonatiWeb/#/projects?q=Calculator%20Native%20App
+
+## Galery
+
+![REACT-NATIVE](https://raw.githubusercontent.com/DiegoLibonati/DiegoLibonatiWeb/main/data/projects/React/Imagenes/calculator-react-native-0.jpg)
+
+![REACT-NATIVE](https://raw.githubusercontent.com/DiegoLibonati/DiegoLibonatiWeb/main/data/projects/React/Imagenes/calculator-react-native-1.jpg)
+
+![REACT-NATIVE](https://raw.githubusercontent.com/DiegoLibonati/DiegoLibonatiWeb/main/data/projects/React/Imagenes/calculator-react-native-2.jpg)
+
+![REACT-NATIVE](https://raw.githubusercontent.com/DiegoLibonati/DiegoLibonatiWeb/main/data/projects/React/Imagenes/calculator-react-native-3.jpg)
+
+![REACT-NATIVE](https://raw.githubusercontent.com/DiegoLibonati/DiegoLibonatiWeb/main/data/projects/React/Imagenes/calculator-react-native-4.jpg)
+
+## Video
+
+## Documentation
+
+### Theme
+
+- If you want to change any style or the entire styles of the application, you can do it through: `calculator-native-app\src\theme\theme.js`.
+
+### Contexts - Logic
+
+- The UI logic is changed in the following path: `src\contexts\UIContext.jsx`.
+
+- The Calculator logic is changed in the following path: `src\contexts\CalculatorContext.jsx`. All the mathematical operation logic is inside this context.
+
+### General views
+
+In general terms, the application is composed of a main component called `Main`. This component is encompassed by the context providers `UI` and `Calculator`. Inside `Main`, we will find the different `views`. The available `Views` are 3:
+
+1. `Switch View`: It is where the Switch to change the theme is rendered.
+2. `Screen View`: It is where the results of the mathematical calculations are rendered.
+3. `Buttons View`: It is where the buttons to use the application are rendered.
