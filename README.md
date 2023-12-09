@@ -36,19 +36,7 @@ It is my first native application. The first of hopefully many :D
 
 ## Portfolio Link
 
-https://diegolibonati.github.io/DiegoLibonatiWeb/#/projects?q=Calculator%20Native%20App
-
-## Galery
-
-![REACT-NATIVE](https://raw.githubusercontent.com/DiegoLibonati/DiegoLibonatiWeb/main/data/projects/React/Imagenes/calculator-react-native-0.jpg)
-
-![REACT-NATIVE](https://raw.githubusercontent.com/DiegoLibonati/DiegoLibonatiWeb/main/data/projects/React/Imagenes/calculator-react-native-1.jpg)
-
-![REACT-NATIVE](https://raw.githubusercontent.com/DiegoLibonati/DiegoLibonatiWeb/main/data/projects/React/Imagenes/calculator-react-native-2.jpg)
-
-![REACT-NATIVE](https://raw.githubusercontent.com/DiegoLibonati/DiegoLibonatiWeb/main/data/projects/React/Imagenes/calculator-react-native-3.jpg)
-
-![REACT-NATIVE](https://raw.githubusercontent.com/DiegoLibonati/DiegoLibonatiWeb/main/data/projects/React/Imagenes/calculator-react-native-4.jpg)
+[`https://www.diegolibonati.com.ar/#/project/15`](https://www.diegolibonati.com.ar/#/project/15)
 
 ## Video
 
