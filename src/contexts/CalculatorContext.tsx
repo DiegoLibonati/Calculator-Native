@@ -1,18 +1,23 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
+import {
+  CalculatorContextT,
+  CalculatorProviderProps,
+  CalculatorState,
+} from "../entities/entities";
 
-export const CalculatorContext = createContext(null);
+export const CalculatorContext = createContext<CalculatorContextT | null>(null);
 
-const initialValues = {
+const initialValues: CalculatorState = {
   firstValue: null,
   operation: null,
   screen: "0",
   comma: false,
 };
 
-export const CalculatorProvider = ({ children }) => {
-  const [values, setValues] = useState(initialValues);
+export const CalculatorProvider = ({ children }: CalculatorProviderProps) => {
+  const [values, setValues] = useState<CalculatorState>(initialValues);
 
-  const handleScreen = (value) => {
+  const handleScreen = (value: string): void => {
     if (values.comma && value === ".") return;
     if (value === ".") values.comma = true;
 
@@ -26,11 +31,11 @@ export const CalculatorProvider = ({ children }) => {
     return setValues({ ...values, screen: `${values.screen}${value}` });
   };
 
-  const resetInitialValues = () => {
+  const resetInitialValues = (): void => {
     return setValues(initialValues);
   };
 
-  const handleOperation = (value) => {
+  const handleOperation = (value: string): void => {
     values.comma = false;
     if (values.operation)
       return setValues({
@@ -49,7 +54,7 @@ export const CalculatorProvider = ({ children }) => {
     });
   };
 
-  const handleConvertNumber = () => {
+  const handleConvertNumber = (): void => {
     if (values.firstValue && values.operation) return;
 
     if (Number(values.screen) > 0) {
@@ -64,34 +69,33 @@ export const CalculatorProvider = ({ children }) => {
       ...values,
       firstValue: Math.abs(Number(values.screen)),
       operation: null,
-      screen: `${Math.abs(values.screen)}`,
+      screen: `${Math.abs(Number(values.screen))}`,
     });
   };
 
-  const handleEqual = () => {
+  const handleEqual = (): void => {
     const secondValue = Number(values.screen.split(" ").pop());
 
     let result = null;
 
     switch (values.operation) {
       case "+":
-        result = values.firstValue + secondValue;
+        result = values.firstValue! + secondValue;
         break;
       case "-":
-        console.log(values.firstValue, secondValue);
-        result = values.firstValue - secondValue;
+        result = values.firstValue! - secondValue;
         break;
 
       case "*":
-        result = values.firstValue * secondValue;
+        result = values.firstValue! * secondValue;
         break;
 
       case "/":
-        result = values.firstValue / secondValue;
+        result = values.firstValue! / secondValue;
         break;
 
       case "%":
-        result = (values.firstValue * secondValue) / 100;
+        result = (values.firstValue! * secondValue) / 100;
         break;
 
       default:
@@ -105,10 +109,6 @@ export const CalculatorProvider = ({ children }) => {
       firstValue: result,
     });
   };
-
-  // useEffect(() => {
-  //   console.log(values);
-  // }, [values]);
 
   return (
     <CalculatorContext.Provider

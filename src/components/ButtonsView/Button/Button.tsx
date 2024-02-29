@@ -2,9 +2,15 @@ import React, { useContext } from "react";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
 import { UIContext } from "../../../contexts/UIContext";
 import { theme } from "../../../theme/theme";
+import { ButtonProps } from "../../../entities/entities";
 
-export const Button = ({ text, containerStyle, buttonStyle, fn }) => {
-  const { isDarkMode } = useContext(UIContext);
+export const Button = ({
+  text,
+  containerStyle,
+  buttonStyle,
+  fn,
+}: ButtonProps): JSX.Element => {
+  const { isDarkMode } = useContext(UIContext)!;
 
   return (
     <TouchableOpacity

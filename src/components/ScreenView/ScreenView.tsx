@@ -3,8 +3,8 @@ import { StyleSheet, Text, View } from "react-native";
 import { theme } from "../../theme/theme";
 import { CalculatorContext } from "../../contexts/CalculatorContext";
 
-export const ScreenView = () => {
-  const { values } = useContext(CalculatorContext);
+export const ScreenView = (): JSX.Element => {
+  const { values } = useContext(CalculatorContext)!;
 
   const { screen } = values;
 

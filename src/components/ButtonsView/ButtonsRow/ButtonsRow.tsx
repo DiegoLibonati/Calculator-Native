@@ -1,7 +1,8 @@
 import React from "react";
 import { Dimensions, StyleSheet, View } from "react-native";
+import { ButtonsRowProps } from "../../../entities/entities";
 
-export const ButtonsRow = ({ children }) => {
+export const ButtonsRow = ({ children }: ButtonsRowProps): JSX.Element => {
   return <View style={styles.container}>{children}</View>;
 };
 

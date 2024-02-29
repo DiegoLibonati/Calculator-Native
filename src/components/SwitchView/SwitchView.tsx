@@ -4,8 +4,9 @@ import { UIContext } from "../../contexts/UIContext";
 import { useContext } from "react";
 import Constants from "expo-constants";
 
-export const SwitchView = () => {
-  const { isDarkMode, handleDarkMode } = useContext(UIContext);
+export const SwitchView = (): JSX.Element => {
+  const { isDarkMode, handleDarkMode } = useContext(UIContext)!;
+  
   return (
     <View style={styles.container}>
       <Switch

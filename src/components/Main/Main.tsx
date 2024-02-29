@@ -1,14 +1,13 @@
-import { Button, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { theme } from "../../theme/theme";
 import { useContext } from "react";
 import { UIContext } from "../../contexts/UIContext";
 import { SwitchView } from "../SwitchView/SwitchView";
 import { ScreenView } from "../ScreenView/ScreenView";
-import { Dimensions } from "react-native";
 import { ButtonsView } from "../ButtonsView/ButtonsView";
 
-export const Main = () => {
-  const { isDarkMode } = useContext(UIContext);
+export const Main = (): JSX.Element => {
+  const { isDarkMode } = useContext(UIContext)!;
 
   return (
     <View

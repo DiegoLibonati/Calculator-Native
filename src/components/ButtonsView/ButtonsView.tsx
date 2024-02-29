@@ -6,15 +6,15 @@ import { theme } from "../../theme/theme";
 import { UIContext } from "../../contexts/UIContext";
 import { CalculatorContext } from "../../contexts/CalculatorContext";
 
-export const ButtonsView = () => {
-  const { isDarkMode } = useContext(UIContext);
+export const ButtonsView = (): JSX.Element => {
+  const { isDarkMode } = useContext(UIContext)!;
   const {
     handleScreen,
     resetInitialValues,
     handleOperation,
     handleEqual,
     handleConvertNumber,
-  } = useContext(CalculatorContext);
+  } = useContext(CalculatorContext)!;
   return (
     <View style={styles.container}>
       <ButtonsRow>
