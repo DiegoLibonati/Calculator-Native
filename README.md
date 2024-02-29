@@ -27,8 +27,9 @@ It is my first native application. The first of hopefully many :D
 ## Technologies used
 
 1. React Native
-2. CSS
-3. Expo
+2. Typescript
+3. CSS
+4. Expo
 
 ## Libraries used
 
@@ -46,13 +47,13 @@ https://user-images.githubusercontent.com/99032604/231316735-6d3a4f64-2b06-47e5-
 
 ### Theme
 
-- If you want to change any style or the entire styles of the application, you can do it through: `calculator-native-app\src\theme\theme.js`.
+- If you want to change any style or the entire styles of the application, you can do it through: `calculator-native-app\src\theme\theme.ts`.
 
 ### Contexts - Logic
 
-- The UI logic is changed in the following path: `src\contexts\UIContext.jsx`.
+- The UI logic is changed in the following path: `src\contexts\UIContext.tsx`.
 
-- The Calculator logic is changed in the following path: `src\contexts\CalculatorContext.jsx`. All the mathematical operation logic is inside this context.
+- The Calculator logic is changed in the following path: `src\contexts\CalculatorContext.tsx`. All the mathematical operation logic is inside this context.
 
 ### General views
 
