@@ -4,8 +4,8 @@
 
 1. Clone the repository on your computer using: `git clone URL`.
 2. Go to the APP directory.
-3. Install dependencies using `npm install`.
-4. If you have expo and an Android simulator installed, you can run the app with the command `npm start` and select the desired option.
+3. Install dependencies using `yarn install`.
+4. If you have expo and an Android simulator installed, you can run the app with the command `yarn start` and select the desired option.
 
 - If you don't have expo and an Android simulator installed, search for a tutorial on YouTube.
 
