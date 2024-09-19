@@ -1,4 +1,4 @@
-# Calculator-Native-App
+# Calculator Native
 
 ## Getting Started
 
@@ -7,20 +7,20 @@
 3. Install dependencies using `yarn install`.
 4. If you have expo and an Android simulator installed, you can run the app with the command `yarn start` and select the desired option.
 
-- If you don't have expo and an Android simulator installed, search for a tutorial on YouTube.
+If you don't have expo and an Android simulator installed, search for a tutorial on YouTube.
 
 ## Description
 
 This application is made with react native. It is a calculator that allows to:
 
-- Change the theme from light to dark
-- Add
-- Subtract
-- Multiply
-- Divide
-- Change from positive to negative and vice versa
-- Return to 0
-- Get the percentage
+1. Change the theme from light to dark
+2. Add
+3. Subtract
+4. Multiply
+5. Divide
+6. Change from positive to negative and vice versa
+7. Return to 0
+8. Get the percentage
 
 It is my first native application. The first of hopefully many :D
 
@@ -37,7 +37,7 @@ It is my first native application. The first of hopefully many :D
 
 ## Portfolio Link
 
-[`https://www.diegolibonati.com.ar/#/project/15`](https://www.diegolibonati.com.ar/#/project/15)
+[`https://www.diegolibonati.com.ar/#/project/Calculator-Native`](https://www.diegolibonati.com.ar/#/project/Calculator-Native)
 
 ## Video
 
@@ -47,13 +47,12 @@ https://user-images.githubusercontent.com/99032604/231316735-6d3a4f64-2b06-47e5-
 
 ### Theme
 
-- If you want to change any style or the entire styles of the application, you can do it through: `calculator-native-app\src\theme\theme.ts`.
+1. If you want to change any style or the entire styles of the application, you can do it through: `calculator-native-app\src\theme\theme.ts`.
 
 ### Contexts - Logic
 
-- The UI logic is changed in the following path: `src\contexts\UIContext.tsx`.
-
-- The Calculator logic is changed in the following path: `src\contexts\CalculatorContext.tsx`. All the mathematical operation logic is inside this context.
+1. The UI logic is changed in the following path: `src\contexts\UIContext.tsx`.
+2. The Calculator logic is changed in the following path: `src\contexts\CalculatorContext.tsx`. All the mathematical operation logic is inside this context.
 
 ### General views
 
