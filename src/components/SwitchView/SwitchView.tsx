@@ -1,22 +1,26 @@
 import { StyleSheet, Switch, View } from "react-native";
-import { theme } from "../../theme/theme";
-import { UIContext } from "../../contexts/UIContext";
-import { useContext } from "react";
 import Constants from "expo-constants";
 
+import { useUiContext } from "../../contexts/UiContext";
+import { theme } from "../../theme/theme";
+
 export const SwitchView = (): JSX.Element => {
-  const { isDarkMode, handleDarkMode } = useContext(UIContext)!;
-  
+  const { uiState, enableDarkMode, disableDarkMode } = useUiContext();
+
   return (
-    <View style={styles.container}>
+    <View style={styles.container} testID="switch-root-view">
       <Switch
         trackColor={{
-          false: theme.constants.white,
           true: theme.constants.black,
+          false: theme.constants.white,
         }}
-        thumbColor={isDarkMode ? theme.dot.dark : theme.dot.light}
-        onValueChange={handleDarkMode}
-        value={isDarkMode}
+        thumbColor={
+          uiState.isDarkModeEnabled ? theme.dot.dark : theme.dot.light
+        }
+        onValueChange={
+          uiState.isDarkModeEnabled ? disableDarkMode : enableDarkMode
+        }
+        value={uiState.isDarkModeEnabled}
       ></Switch>
     </View>
   );

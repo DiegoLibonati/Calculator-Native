@@ -4,10 +4,10 @@
 
 1. Clone the repository on your computer using: `git clone URL`.
 2. Go to the APP directory.
-3. Install dependencies using `yarn install`.
-4. If you have expo and an Android simulator installed, you can run the app with the command `yarn start` and select the desired option.
+3. Execute: `yarn install` or `npm install`
+4. Execute: `yarn start` or `npm start` and select the desired option!
 
-If you don't have expo and an Android simulator installed, search for a tutorial on YouTube.
+- If you don't have expo and an Android simulator installed, search for a tutorial on YouTube.
 
 ## Description
 
@@ -33,7 +33,28 @@ It is my first native application. The first of hopefully many :D
 
 ## Libraries used
 
-1. Expo
+#### Dependencies
+
+```
+"@types/jest": "^29.5.13"
+"@types/node": "^20.10.6"
+"@types/react": "~18.3.12"
+"expo": "^52.0.0"
+"expo-status-bar": "~2.0.0"
+"react": "18.3.1"
+"react-native": "0.76.5"
+```
+
+#### devDependencies
+
+```
+"@babel/core": "^7.20.0"
+"@testing-library/jest-native": "^5.4.3"
+"@testing-library/react-native": "^12.1.2"
+"jest": "^29.7.0"
+"jest-expo": "^52.0.0"
+"typescript": "^5.1.3"
+```
 
 ## Portfolio Link
 
@@ -43,21 +64,7 @@ It is my first native application. The first of hopefully many :D
 
 https://user-images.githubusercontent.com/99032604/231316735-6d3a4f64-2b06-47e5-8cea-b51ba245bb0e.mp4
 
-## Documentation
+## Testing
 
-### Theme
-
-1. If you want to change any style or the entire styles of the application, you can do it through: `calculator-native-app\src\theme\theme.ts`.
-
-### Contexts - Logic
-
-1. The UI logic is changed in the following path: `src\contexts\UIContext.tsx`.
-2. The Calculator logic is changed in the following path: `src\contexts\CalculatorContext.tsx`. All the mathematical operation logic is inside this context.
-
-### General views
-
-In general terms, the application is composed of a main component called `Main`. This component is encompassed by the context providers `UI` and `Calculator`. Inside `Main`, we will find the different `views`. The available `Views` are 3:
-
-1. `Switch View`: It is where the Switch to change the theme is rendered.
-2. `Screen View`: It is where the results of the mathematical calculations are rendered.
-3. `Buttons View`: It is where the buttons to use the application are rendered.
+1. Join to the correct path of the clone
+2. Execute: `yarn test` or `npm test`

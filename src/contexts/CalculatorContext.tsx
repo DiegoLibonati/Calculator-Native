@@ -1,13 +1,22 @@
-import { createContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
+
 import {
-  CalculatorContextT,
-  CalculatorProviderProps,
+  CalculatorContext as CalculatorContextT,
   CalculatorState,
+  Comma,
+  Number as NumberT,
+  Operation,
 } from "../entities/entities";
+
+import { getIfLastCharIsAnOperation } from "../helpers/getIfLastCharIsAnOperation";
+
+interface CalculatorProviderProps {
+  children: React.ReactNode;
+}
 
 export const CalculatorContext = createContext<CalculatorContextT | null>(null);
 
-const initialValues: CalculatorState = {
+const initialCalculatorState: CalculatorState = {
   firstValue: null,
   operation: null,
   screen: "0",
@@ -15,113 +24,152 @@ const initialValues: CalculatorState = {
 };
 
 export const CalculatorProvider = ({ children }: CalculatorProviderProps) => {
-  const [values, setValues] = useState<CalculatorState>(initialValues);
+  const [calculatorState, setCalculatorState] = useState<CalculatorState>(
+    initialCalculatorState
+  );
 
-  const handleScreen = (value: string): void => {
-    if (values.comma && value === ".") return;
-    if (value === ".") values.comma = true;
+  const handleInputScreen = (value: NumberT | Comma): void => {
+    if (calculatorState.comma && value === ".") return;
+    if (value === ".")
+      setCalculatorState((state) => ({ ...state, comma: true }));
 
     if (
-      (values.screen === "0" || (values.firstValue && !values.operation)) &&
+      (calculatorState.screen === "0" ||
+        (calculatorState.firstValue && !calculatorState.operation)) &&
       !(value === ".")
-    ) {
-      return setValues({ ...values, screen: `${value}`, firstValue: null });
-    }
+    )
+      return setCalculatorState((state) => ({
+        ...state,
+        screen: `${value}`,
+        firstValue: null,
+      }));
 
-    return setValues({ ...values, screen: `${values.screen}${value}` });
+    const lastChar = calculatorState.screen[calculatorState.screen.length - 1];
+
+    if (getIfLastCharIsAnOperation(lastChar))
+      return setCalculatorState((state) => ({
+        ...state,
+        screen: `${state.screen} ${value}`,
+      }));
+
+    return setCalculatorState((state) => ({
+      ...state,
+      screen: `${state.screen}${value}`,
+    }));
   };
 
   const resetInitialValues = (): void => {
-    return setValues(initialValues);
+    return setCalculatorState(initialCalculatorState);
   };
 
-  const handleOperation = (value: string): void => {
-    values.comma = false;
-    if (values.operation)
-      return setValues({
-        ...values,
+  const handleInputOperation = (value: Operation): void => {
+    setCalculatorState((state) => ({ ...state, comma: false }));
+
+    const lastChar = calculatorState.screen[calculatorState.screen.length - 1];
+
+    if (
+      calculatorState.firstValue &&
+      calculatorState.operation &&
+      !getIfLastCharIsAnOperation(lastChar)
+    ) {
+      handleGetEqual();
+
+      return setCalculatorState((state) => ({
+        ...state,
+        screen: `${state.firstValue} ${value}`,
         operation: value,
-        screen: `${values.firstValue} ${value} `,
-      });
-
-    if (values.firstValue && values.operation) return handleEqual();
-
-    return setValues({
-      ...values,
-      firstValue: Number(values.screen),
-      operation: value,
-      screen: `${values.screen} ${value} `,
-    });
-  };
-
-  const handleConvertNumber = (): void => {
-    if (values.firstValue && values.operation) return;
-
-    if (Number(values.screen) > 0) {
-      return setValues({
-        ...values,
-        firstValue: -Number(values.screen),
-        operation: null,
-        screen: `-${values.screen}`,
-      });
+      }));
     }
-    return setValues({
-      ...values,
-      firstValue: Math.abs(Number(values.screen)),
-      operation: null,
-      screen: `${Math.abs(Number(values.screen))}`,
-    });
+
+    if (calculatorState.operation)
+      return setCalculatorState((state) => ({
+        ...state,
+        operation: value,
+        screen: `${state.firstValue} ${value}`,
+      }));
+
+    return setCalculatorState((state) => ({
+      ...state,
+      firstValue: Number(state.screen),
+      operation: value,
+      screen: `${state.screen} ${value}`,
+    }));
   };
 
-  const handleEqual = (): void => {
-    const secondValue = Number(values.screen.split(" ").pop());
+  const handleNumberConvert = (): void => {
+    if (calculatorState.firstValue && calculatorState.operation) return;
+
+    if (Number(calculatorState.screen) > 0) {
+      return setCalculatorState((state) => ({
+        ...state,
+        firstValue: -Number(state.screen),
+        operation: null,
+        screen: `-${state.screen}`,
+      }));
+    }
+
+    return setCalculatorState((state) => ({
+      ...state,
+      firstValue: Math.abs(Number(state.screen)),
+      operation: null,
+      screen: `${Math.abs(Number(state.screen))}`,
+    }));
+  };
+
+  const handleGetEqual = (): void => {
+    const secondValue = Number(calculatorState.screen.split(" ").pop());
 
     let result = null;
 
-    switch (values.operation) {
+    switch (calculatorState.operation) {
       case "+":
-        result = values.firstValue! + secondValue;
+        result = calculatorState.firstValue! + secondValue;
         break;
+
       case "-":
-        result = values.firstValue! - secondValue;
+        result = calculatorState.firstValue! - secondValue;
         break;
 
       case "*":
-        result = values.firstValue! * secondValue;
+        result = calculatorState.firstValue! * secondValue;
         break;
 
       case "/":
-        result = values.firstValue! / secondValue;
+        result = calculatorState.firstValue! / secondValue;
         break;
 
       case "%":
-        result = (values.firstValue! * secondValue) / 100;
+        result = (calculatorState.firstValue! * secondValue) / 100;
         break;
 
       default:
         return;
     }
 
-    return setValues({
-      ...values,
+    return setCalculatorState((state) => ({
+      ...state,
       screen: String(result),
       operation: null,
       firstValue: result,
-    });
+    }));
   };
 
   return (
     <CalculatorContext.Provider
       value={{
-        values,
-        handleScreen,
-        resetInitialValues,
-        handleOperation,
-        handleEqual,
-        handleConvertNumber,
+        calculatorState: calculatorState,
+        resetInitialValues: resetInitialValues,
+        handleInputScreen: handleInputScreen,
+        handleInputOperation: handleInputOperation,
+        handleGetEqual: handleGetEqual,
+        handleNumberConvert: handleNumberConvert,
       }}
     >
       {children}
     </CalculatorContext.Provider>
   );
+};
+
+export const useCalculatorContext = (): CalculatorContextT => {
+  return useContext(CalculatorContext)!;
 };

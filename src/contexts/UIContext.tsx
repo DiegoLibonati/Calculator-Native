@@ -1,19 +1,39 @@
-import { createContext, useState } from "react";
-import { UiContextT, UiProviderProps } from "../entities/entities";
+import { createContext, useContext, useState } from "react";
 
-export const UIContext = createContext<UiContextT | null>(null);
+import { UiContext as UiContextT, UiState } from "../entities/entities";
 
-export const UIProvider = ({ children }: UiProviderProps) => {
-  const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
+interface UiProviderProps {
+  children: React.ReactNode;
+}
 
-  const handleDarkMode = (): void => {
-    setIsDarkMode(!isDarkMode);
-    return;
+export const UiContext = createContext<UiContextT | null>(null);
+
+export const UiProvider = ({ children }: UiProviderProps) => {
+  const [uiState, setUiState] = useState<UiState>({
+    isDarkModeEnabled: false,
+  });
+
+  const enableDarkMode = (): void => {
+    setUiState((state) => ({ ...state, isDarkModeEnabled: true }));
+  };
+
+  const disableDarkMode = (): void => {
+    setUiState((state) => ({ ...state, isDarkModeEnabled: false }));
   };
 
   return (
-    <UIContext.Provider value={{ isDarkMode, handleDarkMode }}>
+    <UiContext.Provider
+      value={{
+        uiState: uiState,
+        enableDarkMode: enableDarkMode,
+        disableDarkMode: disableDarkMode,
+      }}
+    >
       {children}
-    </UIContext.Provider>
+    </UiContext.Provider>
   );
+};
+
+export const useUiContext = (): UiContextT => {
+  return useContext(UiContext)!;
 };

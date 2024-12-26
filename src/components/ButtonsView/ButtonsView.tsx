@@ -1,66 +1,83 @@
-import React, { useContext } from "react";
 import { StyleSheet, View } from "react-native";
+
 import { ButtonsRow } from "./ButtonsRow/ButtonsRow";
 import { Button } from "./Button/Button";
+
+import { useCalculatorContext } from "../../contexts/CalculatorContext";
+import { useUiContext } from "../../contexts/UiContext";
 import { theme } from "../../theme/theme";
-import { UIContext } from "../../contexts/UIContext";
-import { CalculatorContext } from "../../contexts/CalculatorContext";
 
 export const ButtonsView = (): JSX.Element => {
-  const { isDarkMode } = useContext(UIContext)!;
+  const { uiState } = useUiContext();
   const {
-    handleScreen,
+    handleInputScreen,
     resetInitialValues,
-    handleOperation,
-    handleEqual,
-    handleConvertNumber,
-  } = useContext(CalculatorContext)!;
+    handleInputOperation,
+    handleGetEqual,
+    handleNumberConvert,
+  } = useCalculatorContext();
+
   return (
-    <View style={styles.container}>
+    <View style={styles.container} testID="buttons-root-view">
       <ButtonsRow>
-        <Button text="AC" fn={resetInitialValues}></Button>
-        <Button text="+/-" fn={() => handleConvertNumber()}></Button>
-        <Button text="%" fn={() => handleOperation("%")}></Button>
-        <Button text="/" fn={() => handleOperation("/")}></Button>
+        <Button text="AC" onPressButton={resetInitialValues}></Button>
+        <Button text="+/-" onPressButton={handleNumberConvert}></Button>
+        <Button
+          text="%"
+          onPressButton={() => handleInputOperation("%")}
+        ></Button>
+        <Button
+          text="/"
+          onPressButton={() => handleInputOperation("/")}
+        ></Button>
       </ButtonsRow>
 
       <ButtonsRow>
-        <Button text="7" fn={() => handleScreen("7")}></Button>
-        <Button text="8" fn={() => handleScreen("8")}></Button>
-        <Button text="9" fn={() => handleScreen("9")}></Button>
-        <Button text="X" fn={() => handleOperation("*")}></Button>
+        <Button text="7" onPressButton={() => handleInputScreen("7")}></Button>
+        <Button text="8" onPressButton={() => handleInputScreen("8")}></Button>
+        <Button text="9" onPressButton={() => handleInputScreen("9")}></Button>
+        <Button
+          text="X"
+          onPressButton={() => handleInputOperation("*")}
+        ></Button>
       </ButtonsRow>
 
       <ButtonsRow>
-        <Button text="4" fn={() => handleScreen("4")}></Button>
-        <Button text="5" fn={() => handleScreen("5")}></Button>
-        <Button text="6" fn={() => handleScreen("6")}></Button>
-        <Button text="-" fn={() => handleOperation("-")}></Button>
+        <Button text="4" onPressButton={() => handleInputScreen("4")}></Button>
+        <Button text="5" onPressButton={() => handleInputScreen("5")}></Button>
+        <Button text="6" onPressButton={() => handleInputScreen("6")}></Button>
+        <Button
+          text="-"
+          onPressButton={() => handleInputOperation("-")}
+        ></Button>
       </ButtonsRow>
 
       <ButtonsRow>
-        <Button text="3" fn={() => handleScreen("3")}></Button>
-        <Button text="2" fn={() => handleScreen("2")}></Button>
-        <Button text="1" fn={() => handleScreen("1")}></Button>
-        <Button text="+" fn={() => handleOperation("+")}></Button>
+        <Button text="3" onPressButton={() => handleInputScreen("3")}></Button>
+        <Button text="2" onPressButton={() => handleInputScreen("2")}></Button>
+        <Button text="1" onPressButton={() => handleInputScreen("1")}></Button>
+        <Button
+          text="+"
+          onPressButton={() => handleInputOperation("+")}
+        ></Button>
       </ButtonsRow>
 
       <ButtonsRow>
         <Button
           text="0"
-          fn={() => handleScreen("0")}
+          onPressButton={() => handleInputScreen("0")}
           containerStyle={{ flex: 2.03 }}
         ></Button>
-        <Button text="." fn={() => handleScreen(".")}></Button>
+        <Button text="." onPressButton={() => handleInputScreen(".")}></Button>
         <Button
           text="="
-          fn={() => handleEqual()}
+          onPressButton={() => handleGetEqual()}
           containerStyle={{
-            backgroundColor: isDarkMode
+            backgroundColor: uiState.isDarkModeEnabled
               ? theme.background.primaryDark
               : theme.background.primaryLight,
           }}
-          buttonStyle={{ color: theme.colors.white }}
+          textStyle={{ color: theme.colors.white }}
         ></Button>
       </ButtonsRow>
     </View>

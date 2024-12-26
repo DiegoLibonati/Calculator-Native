@@ -1,9 +1,13 @@
-import React from "react";
 import { Dimensions, StyleSheet, View } from "react-native";
-import { ButtonsRowProps } from "../../../entities/entities";
+
+import { GeneralProps } from "../../../entities/entities";
+
+interface ButtonsRowProps extends GeneralProps {
+  children: React.ReactNode;
+}
 
 export const ButtonsRow = ({ children }: ButtonsRowProps): JSX.Element => {
-  return <View style={styles.container}>{children}</View>;
+  return <View style={styles.container} testID="buttons-row-root">{children}</View>;
 };
 
 const styles = StyleSheet.create({

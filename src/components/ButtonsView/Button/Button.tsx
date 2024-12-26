@@ -1,40 +1,40 @@
-import React, { useContext } from "react";
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
-import { UIContext } from "../../../contexts/UIContext";
+
+import { GeneralProps } from "../../../entities/entities";
+
+import { useUiContext } from "../../../contexts/UiContext";
 import { theme } from "../../../theme/theme";
-import { ButtonProps } from "../../../entities/entities";
+
+interface ButtonProps extends GeneralProps {
+  text: string;
+  containerStyle?: Record<string, string | number>;
+  textStyle?: Record<string, string | number>;
+  onPressButton: () => void;
+}
 
 export const Button = ({
   text,
   containerStyle,
-  buttonStyle,
-  fn,
+  textStyle,
+  onPressButton,
 }: ButtonProps): JSX.Element => {
-  const { isDarkMode } = useContext(UIContext)!;
+  const { uiState } = useUiContext();
 
   return (
     <TouchableOpacity
       style={[
         styles.container,
         {
-          backgroundColor: isDarkMode
+          backgroundColor: uiState.isDarkModeEnabled
             ? theme.background.secondaryDark
             : theme.background.secondaryLight,
           ...containerStyle,
         },
       ]}
-      onPress={fn}
+      testID={`root-touchable-button-${text}`}
+      onPress={onPressButton}
     >
-      <Text
-        style={[
-          styles.buttonText,
-          {
-            ...buttonStyle,
-          },
-        ]}
-      >
-        {text}
-      </Text>
+      <Text style={[styles.buttonText, { ...textStyle }]}>{text}</Text>
     </TouchableOpacity>
   );
 };

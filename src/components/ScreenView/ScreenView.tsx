@@ -1,15 +1,15 @@
-import React, { useContext } from "react";
 import { StyleSheet, Text, View } from "react-native";
+
+import { useCalculatorContext } from "../../contexts/CalculatorContext";
 import { theme } from "../../theme/theme";
-import { CalculatorContext } from "../../contexts/CalculatorContext";
 
 export const ScreenView = (): JSX.Element => {
-  const { values } = useContext(CalculatorContext)!;
+  const { calculatorState } = useCalculatorContext();
 
-  const { screen } = values;
+  const { screen } = calculatorState;
 
   return (
-    <View style={styles.container}>
+    <View style={styles.container} testID="screen-root-view">
       <Text style={styles.text}>{screen}</Text>
     </View>
   );
