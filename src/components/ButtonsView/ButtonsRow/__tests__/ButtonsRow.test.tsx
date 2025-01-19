@@ -23,10 +23,14 @@ const renderComponent = (): RenderComponent => {
   };
 };
 
-test("It must render the component.", () => {
-  const { gets } = renderComponent();
+describe("ButtonsRow.tsx", () => {
+  describe("General Tests.", () => {
+    test("It must render the component.", () => {
+      const { gets } = renderComponent();
 
-  const buttonsRow = gets?.getByTestId!("buttons-row-root");
+      const buttonsRow = gets?.getByTestId!("buttons-row-root");
 
-  expect(buttonsRow).toBeTruthy();
+      expect(buttonsRow).toBeTruthy();
+    });
+  });
 });

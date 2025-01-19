@@ -10,11 +10,6 @@ import { theme } from "../../../theme/theme";
 
 type RenderComponent = {} & GlobalTest;
 
-jest.mock("../../../contexts/UiContext", () => ({
-  ...jest.requireActual("../../../contexts/UiContext"),
-  useUiContext: jest.fn(),
-}));
-
 const renderComponent = (): RenderComponent => {
   const { debug, getByText, getByRole, getByTestId } = render(
     <CalculatorProvider>
@@ -34,78 +29,87 @@ const renderComponent = (): RenderComponent => {
   };
 };
 
-describe("If dark mode is enabled", () => {
-  const isDarkModeEnabled = true;
+jest.mock("../../../contexts/UiContext", () => ({
+  ...jest.requireActual("../../../contexts/UiContext"),
+  useUiContext: jest.fn(),
+}));
 
-  beforeEach(() => {
-    jest.clearAllMocks();
+describe("Main.tsx", () => {
+  describe("If dark mode is enabled", () => {
+    const isDarkModeEnabled = true;
 
-    (useUiContext as jest.Mock).mockReturnValue({
-      uiState: {
-        isDarkModeEnabled: isDarkModeEnabled,
-      },
+    beforeEach(() => {
+      jest.clearAllMocks();
+
+      (useUiContext as jest.Mock).mockReturnValue({
+        uiState: {
+          isDarkModeEnabled: isDarkModeEnabled,
+        },
+      });
+    });
+
+    test("It must render the main container with the relevant styles.", () => {
+      const { gets } = renderComponent();
+
+      const main = gets?.getByTestId!("main-root");
+
+      expect(main).toBeTruthy();
+      expect(main).toHaveStyle({
+        backgroundColor: theme.background.primaryDark,
+      });
     });
   });
 
-  test("It must render the main container with the relevant styles.", () => {
-    const { gets } = renderComponent();
+  describe("If dark mode is disabled", () => {
+    const isDarkModeEnabled = false;
 
-    const main = gets?.getByTestId!("main-root");
+    beforeEach(() => {
+      jest.clearAllMocks();
 
-    expect(main).toBeTruthy();
-    expect(main).toHaveStyle({ backgroundColor: theme.background.primaryDark });
-  });
-});
+      (useUiContext as jest.Mock).mockReturnValue({
+        uiState: {
+          isDarkModeEnabled: isDarkModeEnabled,
+        },
+      });
+    });
 
-describe("If dark mode is disabled", () => {
-  const isDarkModeEnabled = false;
+    test("It must render the main container with the relevant styles.", () => {
+      const { gets } = renderComponent();
 
-  beforeEach(() => {
-    jest.clearAllMocks();
+      const main = gets?.getByTestId!("main-root");
 
-    (useUiContext as jest.Mock).mockReturnValue({
-      uiState: {
-        isDarkModeEnabled: isDarkModeEnabled,
-      },
+      expect(main).toBeTruthy();
+      expect(main).toHaveStyle({
+        backgroundColor: theme.background.primaryLight,
+      });
     });
   });
 
-  test("It must render the main container with the relevant styles.", () => {
-    const { gets } = renderComponent();
+  describe("General Tests", () => {
+    const isDarkModeEnabled = false;
 
-    const main = gets?.getByTestId!("main-root");
+    beforeEach(() => {
+      jest.clearAllMocks();
 
-    expect(main).toBeTruthy();
-    expect(main).toHaveStyle({
-      backgroundColor: theme.background.primaryLight,
+      (useUiContext as jest.Mock).mockReturnValue({
+        uiState: {
+          isDarkModeEnabled: isDarkModeEnabled,
+        },
+      });
     });
-  });
-});
 
-describe("General Tests", () => {
-  const isDarkModeEnabled = false;
+    test("It must render the main container, the switch view, the screen view, and the button view.", () => {
+      const { gets } = renderComponent();
 
-  beforeEach(() => {
-    jest.clearAllMocks();
+      const main = gets?.getByTestId!("main-root");
+      const switchView = gets?.getByTestId!("switch-root-view");
+      const screenView = gets?.getByTestId!("screen-root-view");
+      const buttonsView = gets?.getByTestId!("buttons-root-view");
 
-    (useUiContext as jest.Mock).mockReturnValue({
-      uiState: {
-        isDarkModeEnabled: isDarkModeEnabled,
-      },
+      expect(main).toBeTruthy();
+      expect(switchView).toBeTruthy();
+      expect(screenView).toBeTruthy();
+      expect(buttonsView).toBeTruthy();
     });
-  });
-
-  test("It must render the main container, the switch view, the screen view, and the button view.", () => {
-    const { gets } = renderComponent();
-
-    const main = gets?.getByTestId!("main-root");
-    const switchView = gets?.getByTestId!("switch-root-view");
-    const screenView = gets?.getByTestId!("screen-root-view");
-    const buttonsView = gets?.getByTestId!("buttons-root-view");
-
-    expect(main).toBeTruthy();
-    expect(switchView).toBeTruthy();
-    expect(screenView).toBeTruthy();
-    expect(buttonsView).toBeTruthy();
   });
 });

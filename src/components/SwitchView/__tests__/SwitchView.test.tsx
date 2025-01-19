@@ -5,17 +5,8 @@ import { GlobalTest } from "../../../entities/entities";
 import { SwitchView } from "../SwitchView";
 
 import { UiProvider, useUiContext } from "../../../contexts/UiContext";
-import { theme } from "../../../theme/theme";
 
 type RenderComponent = {} & GlobalTest;
-
-const mockEnableDarkMode = jest.fn();
-const mockDisableDarkMode = jest.fn();
-
-jest.mock("../../../contexts/UiContext", () => ({
-  ...jest.requireActual("../../../contexts/UiContext"),
-  useUiContext: jest.fn(),
-}));
 
 const renderComponent = (): RenderComponent => {
   const { debug, getByText, getByRole, getByTestId } = render(
@@ -34,60 +25,73 @@ const renderComponent = (): RenderComponent => {
   };
 };
 
-describe("If dark mode is enabled", () => {
-  const isDarkModeEnabled = true;
+jest.mock("../../../contexts/UiContext", () => ({
+  ...jest.requireActual("../../../contexts/UiContext"),
+  useUiContext: jest.fn(),
+}));
 
-  beforeEach(() => {
-    jest.clearAllMocks();
+describe("SwitchView.tsx", () => {
+  describe("If dark mode is enabled", () => {
+    const mockEnableDarkMode = jest.fn();
+    const mockDisableDarkMode = jest.fn();
 
-    (useUiContext as jest.Mock).mockReturnValue({
-      uiState: {
-        isDarkModeEnabled: isDarkModeEnabled,
-      },
-      enableDarkMode: mockEnableDarkMode,
-      disableDarkMode: mockDisableDarkMode,
+    const isDarkModeEnabled = true;
+
+    beforeEach(() => {
+      jest.clearAllMocks();
+
+      (useUiContext as jest.Mock).mockReturnValue({
+        uiState: {
+          isDarkModeEnabled: isDarkModeEnabled,
+        },
+        enableDarkMode: mockEnableDarkMode,
+        disableDarkMode: mockDisableDarkMode,
+      });
+    });
+
+    test("It should render the switch and execute the relevant functions when pressed.", () => {
+      const { gets } = renderComponent();
+
+      const switchComponent = gets?.getByRole!("switch");
+
+      expect(switchComponent).toBeTruthy();
+      expect(switchComponent.props.value).toBe(isDarkModeEnabled);
+
+      fireEvent(switchComponent, "onValueChange");
+
+      expect(mockDisableDarkMode).toHaveBeenCalledTimes(1);
     });
   });
 
-  test("It should render the switch and execute the relevant functions when pressed.", () => {
-    const { gets } = renderComponent();
+  describe("If dark mode is disabled", () => {
+    const mockEnableDarkMode = jest.fn();
+    const mockDisableDarkMode = jest.fn();
 
-    const switchComponent = gets?.getByRole!("switch");
+    const isDarkModeEnabled = false;
 
-    expect(switchComponent).toBeTruthy();
-    expect(switchComponent.props.value).toBe(isDarkModeEnabled);
+    beforeEach(() => {
+      jest.clearAllMocks();
 
-    fireEvent(switchComponent, "onValueChange");
-
-    expect(mockDisableDarkMode).toHaveBeenCalledTimes(1);
-  });
-});
-
-describe("If dark mode is disabled", () => {
-  const isDarkModeEnabled = false;
-
-  beforeEach(() => {
-    jest.clearAllMocks();
-
-    (useUiContext as jest.Mock).mockReturnValue({
-      uiState: {
-        isDarkModeEnabled: isDarkModeEnabled,
-      },
-      enableDarkMode: mockEnableDarkMode,
-      disableDarkMode: mockDisableDarkMode,
+      (useUiContext as jest.Mock).mockReturnValue({
+        uiState: {
+          isDarkModeEnabled: isDarkModeEnabled,
+        },
+        enableDarkMode: mockEnableDarkMode,
+        disableDarkMode: mockDisableDarkMode,
+      });
     });
-  });
 
-  test("It should render the switch and execute the relevant functions when pressed.", () => {
-    const { gets } = renderComponent();
+    test("It should render the switch and execute the relevant functions when pressed.", () => {
+      const { gets } = renderComponent();
 
-    const switchComponent = gets?.getByRole!("switch");
+      const switchComponent = gets?.getByRole!("switch");
 
-    expect(switchComponent).toBeTruthy();
-    expect(switchComponent.props.value).toBe(isDarkModeEnabled);
+      expect(switchComponent).toBeTruthy();
+      expect(switchComponent.props.value).toBe(isDarkModeEnabled);
 
-    fireEvent(switchComponent, "onValueChange");
+      fireEvent(switchComponent, "onValueChange");
 
-    expect(mockEnableDarkMode).toHaveBeenCalledTimes(1);
+      expect(mockEnableDarkMode).toHaveBeenCalledTimes(1);
+    });
   });
 });

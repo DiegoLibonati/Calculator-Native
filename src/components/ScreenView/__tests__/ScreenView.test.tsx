@@ -11,26 +11,6 @@ import {
 
 type RenderComponent = {} & GlobalTest;
 
-const INITIAL_CALCULATOR_STATE: CalculatorState = {
-  firstValue: 10,
-  operation: "+",
-  screen: "20",
-  comma: false,
-};
-
-jest.mock("../../../contexts/CalculatorContext", () => ({
-  ...jest.requireActual("../../../contexts/CalculatorContext"),
-  useCalculatorContext: jest.fn(),
-}));
-
-beforeEach(() => {
-  jest.clearAllMocks();
-
-  (useCalculatorContext as jest.Mock).mockReturnValue({
-    calculatorState: INITIAL_CALCULATOR_STATE,
-  });
-});
-
 const renderComponent = (): RenderComponent => {
   const { debug, getByText, getByRole, getByTestId } = render(
     <CalculatorProvider>
@@ -48,10 +28,34 @@ const renderComponent = (): RenderComponent => {
   };
 };
 
-test("It must render the screen.", () => {
-  const { gets } = renderComponent();
+jest.mock("../../../contexts/CalculatorContext", () => ({
+  ...jest.requireActual("../../../contexts/CalculatorContext"),
+  useCalculatorContext: jest.fn(),
+}));
 
-  const screen = gets?.getByText!(INITIAL_CALCULATOR_STATE.screen);
+describe("ScreenView.tsx", () => {
+  describe("General Tests.", () => {
+    const INITIAL_CALCULATOR_STATE: CalculatorState = {
+      firstValue: 10,
+      operation: "+",
+      screen: "20",
+      comma: false,
+    };
 
-  expect(screen).toBeTruthy();
+    beforeEach(() => {
+      jest.clearAllMocks();
+
+      (useCalculatorContext as jest.Mock).mockReturnValue({
+        calculatorState: INITIAL_CALCULATOR_STATE,
+      });
+    });
+
+    test("It must render the screen.", () => {
+      const { gets } = renderComponent();
+
+      const screen = gets?.getByText!(INITIAL_CALCULATOR_STATE.screen);
+
+      expect(screen).toBeTruthy();
+    });
+  });
 });

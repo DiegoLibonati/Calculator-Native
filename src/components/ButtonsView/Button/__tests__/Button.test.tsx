@@ -16,11 +16,6 @@ type RenderComponent = {
   };
 } & GlobalTest;
 
-jest.mock("../../../../contexts/UiContext", () => ({
-  ...jest.requireActual("../../../../contexts/UiContext"),
-  useUiContext: jest.fn(),
-}));
-
 const renderComponent = (): RenderComponent => {
   const props = {
     text: "text",
@@ -51,93 +46,100 @@ const renderComponent = (): RenderComponent => {
   };
 };
 
-describe("If dark mode is enabled", () => {
-  const isDarkModeEnabled = true;
+jest.mock("../../../../contexts/UiContext", () => ({
+  ...jest.requireActual("../../../../contexts/UiContext"),
+  useUiContext: jest.fn(),
+}));
 
-  beforeEach(() => {
-    jest.clearAllMocks();
+describe("Button.tsx", () => {
+  describe("If dark mode is enabled", () => {
+    const isDarkModeEnabled = true;
 
-    (useUiContext as jest.Mock).mockReturnValue({
-      uiState: {
-        isDarkModeEnabled: isDarkModeEnabled,
-      },
+    beforeEach(() => {
+      jest.clearAllMocks();
+
+      (useUiContext as jest.Mock).mockReturnValue({
+        uiState: {
+          isDarkModeEnabled: isDarkModeEnabled,
+        },
+      });
+    });
+
+    test("It must render the touchableOpacity with the relevant styles.", () => {
+      const { props, gets } = renderComponent();
+
+      const touchableOpacity = gets?.getByTestId!(
+        `root-touchable-button-${props.text}`
+      );
+
+      expect(touchableOpacity).toBeTruthy();
+      expect(touchableOpacity).toHaveStyle({
+        backgroundColor: theme.background.secondaryDark,
+        ...props.containerStyle,
+      });
     });
   });
 
-  test("It must render the touchableOpacity with the relevant styles.", () => {
-    const { props, gets } = renderComponent();
+  describe("If dark mode is disabled", () => {
+    const isDarkModeEnabled = false;
 
-    const touchableOpacity = gets?.getByTestId!(
-      `root-touchable-button-${props.text}`
-    );
+    beforeEach(() => {
+      jest.clearAllMocks();
 
-    expect(touchableOpacity).toBeTruthy();
-    expect(touchableOpacity).toHaveStyle({
-      backgroundColor: theme.background.secondaryDark,
-      ...props.containerStyle,
+      (useUiContext as jest.Mock).mockReturnValue({
+        uiState: {
+          isDarkModeEnabled: isDarkModeEnabled,
+        },
+      });
     });
-  });
-});
 
-describe("If dark mode is disabled", () => {
-  const isDarkModeEnabled = false;
+    test("It must render the touchableOpacity with the relevant styles.", () => {
+      const { props, gets } = renderComponent();
 
-  beforeEach(() => {
-    jest.clearAllMocks();
+      const touchableOpacity = gets?.getByTestId!(
+        `root-touchable-button-${props.text}`
+      );
 
-    (useUiContext as jest.Mock).mockReturnValue({
-      uiState: {
-        isDarkModeEnabled: isDarkModeEnabled,
-      },
-    });
-  });
-
-  test("It must render the touchableOpacity with the relevant styles.", () => {
-    const { props, gets } = renderComponent();
-
-    const touchableOpacity = gets?.getByTestId!(
-      `root-touchable-button-${props.text}`
-    );
-
-    expect(touchableOpacity).toBeTruthy();
-    expect(touchableOpacity).toHaveStyle({
-      backgroundColor: theme.background.secondaryLight,
-      ...props.containerStyle,
-    });
-  });
-});
-
-describe("General Tests", () => {
-  const isDarkModeEnabled = false;
-
-  beforeEach(() => {
-    jest.clearAllMocks();
-
-    (useUiContext as jest.Mock).mockReturnValue({
-      uiState: {
-        isDarkModeEnabled: isDarkModeEnabled,
-      },
+      expect(touchableOpacity).toBeTruthy();
+      expect(touchableOpacity).toHaveStyle({
+        backgroundColor: theme.background.secondaryLight,
+        ...props.containerStyle,
+      });
     });
   });
 
-  test("The 'onPressButton' function must be executed when it is pressed.", () => {
-    const { props, gets } = renderComponent();
+  describe("General Tests", () => {
+    const isDarkModeEnabled = false;
 
-    const touchableOpacity = gets?.getByTestId!(
-      `root-touchable-button-${props.text}`
-    );
+    beforeEach(() => {
+      jest.clearAllMocks();
 
-    fireEvent.press(touchableOpacity);
+      (useUiContext as jest.Mock).mockReturnValue({
+        uiState: {
+          isDarkModeEnabled: isDarkModeEnabled,
+        },
+      });
+    });
 
-    expect(props.mockOnPressButton).toHaveBeenCalledTimes(1);
-  });
+    test("The 'onPressButton' function must be executed when it is pressed.", () => {
+      const { props, gets } = renderComponent();
 
-  test("It must render the text element with your styles.", () => {
-    const { props, gets } = renderComponent();
+      const touchableOpacity = gets?.getByTestId!(
+        `root-touchable-button-${props.text}`
+      );
 
-    const btnText = gets?.getByText!(props.text);
+      fireEvent.press(touchableOpacity);
 
-    expect(btnText).toBeTruthy();
-    expect(btnText).toHaveStyle(props.textStyle);
+      expect(props.mockOnPressButton).toHaveBeenCalledTimes(1);
+    });
+
+    test("It must render the text element with your styles.", () => {
+      const { props, gets } = renderComponent();
+
+      const btnText = gets?.getByText!(props.text);
+
+      expect(btnText).toBeTruthy();
+      expect(btnText).toHaveStyle(props.textStyle);
+    });
   });
 });
