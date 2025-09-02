@@ -36,9 +36,6 @@ It is my first native application. The first of hopefully many :D
 #### Dependencies
 
 ```
-"@types/jest": "^29.5.13"
-"@types/node": "^20.10.6"
-"@types/react": "~18.3.12"
 "expo": "^52.0.0"
 "expo-status-bar": "~2.0.0"
 "react": "18.3.1"
@@ -51,8 +48,12 @@ It is my first native application. The first of hopefully many :D
 "@babel/core": "^7.20.0"
 "@testing-library/jest-native": "^5.4.3"
 "@testing-library/react-native": "^12.1.2"
+"@types/jest": "^29.5.13"
+"@types/node": "^20.10.6"
+"@types/react": "~18.3.12"
 "jest": "^29.7.0"
 "jest-expo": "^52.0.0"
+"react-test-renderer": "^18.3.1"
 "typescript": "^5.1.3"
 ```
 
