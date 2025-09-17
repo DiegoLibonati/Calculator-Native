@@ -1,13 +1,13 @@
 import { render } from "@testing-library/react-native";
 
-import { CalculatorState, GlobalTest } from "../../../entities/entities";
+import { CalculatorState, GlobalTest } from "@src/entities/entities";
 
-import { ScreenView } from "../ScreenView";
+import { ScreenView } from "@src/components/ScreenView/ScreenView";
 
 import {
   CalculatorProvider,
   useCalculatorContext,
-} from "../../../contexts/CalculatorContext";
+} from "@src/contexts/CalculatorContext";
 
 type RenderComponent = {} & GlobalTest;
 

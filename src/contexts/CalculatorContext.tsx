@@ -6,9 +6,9 @@ import {
   Comma,
   Number as NumberT,
   Operation,
-} from "../entities/entities";
+} from "@src/entities/entities";
 
-import { getIfLastCharIsAnOperation } from "../helpers/getIfLastCharIsAnOperation";
+import { getIfLastCharIsAnOperation } from "@src/helpers/getIfLastCharIsAnOperation";
 
 interface CalculatorProviderProps {
   children: React.ReactNode;

@@ -1,9 +1,9 @@
 import { StyleSheet, Text, View } from "react-native";
 
-import { useCalculatorContext } from "../../contexts/CalculatorContext";
-import { theme } from "../../theme/theme";
+import { useCalculatorContext } from "@src/contexts/CalculatorContext";
+import { theme } from "@src/theme/theme";
 
-export const ScreenView = (): JSX.Element => {
+export const ScreenView = () => {
   const { calculatorState } = useCalculatorContext();
 
   const { screen } = calculatorState;

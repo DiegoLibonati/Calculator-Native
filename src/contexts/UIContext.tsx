@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from "react";
 
-import { UiContext as UiContextT, UiState } from "../entities/entities";
+import { UiContext as UiContextT, UiState } from "@src/entities/entities";
 
 interface UiProviderProps {
   children: React.ReactNode;

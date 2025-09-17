@@ -1,8 +1,8 @@
 import { render } from "@testing-library/react-native";
 
-import { GlobalTest } from "../../../../entities/entities";
+import { GlobalTest } from "@src/entities/entities";
 
-import { ButtonsRow } from "../ButtonsRow";
+import { ButtonsRow } from "@src/components/ButtonsView/ButtonsRow/ButtonsRow";
 
 type RenderComponent = {} & GlobalTest;
 

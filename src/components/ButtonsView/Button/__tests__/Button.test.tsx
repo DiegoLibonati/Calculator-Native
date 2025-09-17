@@ -1,11 +1,11 @@
 import { render, fireEvent } from "@testing-library/react-native";
 
-import { GlobalTest } from "../../../../entities/entities";
+import { GlobalTest } from "@src/entities/entities";
 
-import { Button } from "../Button";
+import { Button } from "@src/components/ButtonsView/Button/Button";
 
-import { UiProvider, useUiContext } from "../../../../contexts/UiContext";
-import { theme } from "../../../../theme/theme";
+import { UiProvider, useUiContext } from "@src/contexts/UiContext";
+import { theme } from "@src/theme/theme";
 
 type RenderComponent = {
   props: {

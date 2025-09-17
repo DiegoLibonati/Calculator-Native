@@ -1,12 +1,12 @@
 import { render } from "@testing-library/react-native";
 
-import { GlobalTest } from "../../../entities/entities";
+import { GlobalTest } from "@src/entities/entities";
 
-import { Main } from "../Main";
+import { Main } from "@src/components/Main/Main";
 
-import { UiProvider, useUiContext } from "../../../contexts/UiContext";
-import { CalculatorProvider } from "../../../contexts/CalculatorContext";
-import { theme } from "../../../theme/theme";
+import { UiProvider, useUiContext } from "@src/contexts/UIContext";
+import { CalculatorProvider } from "@src/contexts/CalculatorContext";
+import { theme } from "@src/theme/theme";
 
 type RenderComponent = {} & GlobalTest;
 
