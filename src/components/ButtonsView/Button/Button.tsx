@@ -1,9 +1,9 @@
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
 
-import { GeneralProps } from "../../../entities/entities";
+import { GeneralProps } from "@src/entities/entities";
 
-import { useUiContext } from "../../../contexts/UiContext";
-import { theme } from "../../../theme/theme";
+import { useUiContext } from "@src/contexts/UIContext";
+import { theme } from "@src/theme/theme";
 
 interface ButtonProps extends GeneralProps {
   text: string;
@@ -17,7 +17,7 @@ export const Button = ({
   containerStyle,
   textStyle,
   onPressButton,
-}: ButtonProps): JSX.Element => {
+}: ButtonProps) => {
   const { uiState } = useUiContext();
 
   return (

@@ -1,10 +1,10 @@
 import { fireEvent, render } from "@testing-library/react-native";
 
-import { GlobalTest } from "../../../entities/entities";
+import { GlobalTest } from "@src/entities/entities";
 
-import { SwitchView } from "../SwitchView";
+import { SwitchView } from "@src/components/SwitchView/SwitchView";
 
-import { UiProvider, useUiContext } from "../../../contexts/UiContext";
+import { UiProvider, useUiContext } from "@src/contexts/UIContext";
 
 type RenderComponent = {} & GlobalTest;
 

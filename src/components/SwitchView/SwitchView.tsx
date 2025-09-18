@@ -1,10 +1,10 @@
 import { StyleSheet, Switch, View } from "react-native";
 import Constants from "expo-constants";
 
-import { useUiContext } from "../../contexts/UiContext";
-import { theme } from "../../theme/theme";
+import { useUiContext } from "@src/contexts/UIContext";
+import { theme } from "@src/theme/theme";
 
-export const SwitchView = (): JSX.Element => {
+export const SwitchView = () => {
   const { uiState, enableDarkMode, disableDarkMode } = useUiContext();
 
   return (

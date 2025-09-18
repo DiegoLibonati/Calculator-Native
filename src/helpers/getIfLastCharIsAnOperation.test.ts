@@ -1,6 +1,6 @@
-import { Operation } from "../entities/entities";
+import { Operation } from "@src/entities/entities";
 
-import { getIfLastCharIsAnOperation } from "./getIfLastCharIsAnOperation";
+import { getIfLastCharIsAnOperation } from "@src/helpers/getIfLastCharIsAnOperation";
 
 describe("getIfLastCharIsAnOperation.ts", () => {
   describe("General Tests.", () => {

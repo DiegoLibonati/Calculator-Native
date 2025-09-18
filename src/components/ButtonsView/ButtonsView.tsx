@@ -1,13 +1,13 @@
 import { StyleSheet, View } from "react-native";
 
-import { ButtonsRow } from "./ButtonsRow/ButtonsRow";
-import { Button } from "./Button/Button";
+import { ButtonsRow } from "@src/components/ButtonsView/ButtonsRow/ButtonsRow";
+import { Button } from "@src/components/ButtonsView/Button/Button";
 
-import { useCalculatorContext } from "../../contexts/CalculatorContext";
-import { useUiContext } from "../../contexts/UiContext";
-import { theme } from "../../theme/theme";
+import { useCalculatorContext } from "@src/contexts/CalculatorContext";
+import { useUiContext } from "@src/contexts/UIContext";
+import { theme } from "@src/theme/theme";
 
-export const ButtonsView = (): JSX.Element => {
+export const ButtonsView = () => {
   const { uiState } = useUiContext();
   const {
     handleInputScreen,

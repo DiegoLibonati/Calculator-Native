@@ -4,9 +4,9 @@ import { StatusBar } from "expo-status-bar";
 import { Main } from "./src/components/Main/Main";
 
 import { CalculatorProvider } from "./src/contexts/CalculatorContext";
-import { UiProvider } from "./src/contexts/UiContext";
+import { UiProvider } from "./src/contexts/UIContext";
 
-export default function App(): JSX.Element {
+export default function App() {
   return (
     <Fragment>
       <StatusBar style="light"></StatusBar>

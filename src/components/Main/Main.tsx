@@ -1,13 +1,13 @@
 import { StyleSheet, View } from "react-native";
 
-import { SwitchView } from "../SwitchView/SwitchView";
-import { ScreenView } from "../ScreenView/ScreenView";
-import { ButtonsView } from "../ButtonsView/ButtonsView";
+import { SwitchView } from "@src/components/SwitchView/SwitchView";
+import { ScreenView } from "@src/components/ScreenView/ScreenView";
+import { ButtonsView } from "@src/components/ButtonsView/ButtonsView";
 
-import { useUiContext } from "../../contexts/UiContext";
-import { theme } from "../../theme/theme";
+import { useUiContext } from "@src/contexts/UIContext";
+import { theme } from "@src/theme/theme";
 
-export const Main = (): JSX.Element => {
+export const Main = () => {
   const { uiState } = useUiContext();
 
   return (

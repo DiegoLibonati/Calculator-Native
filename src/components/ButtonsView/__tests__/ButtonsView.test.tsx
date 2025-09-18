@@ -1,15 +1,15 @@
 import { render, fireEvent } from "@testing-library/react-native";
 
-import { GlobalTest } from "../../../entities/entities";
+import { GlobalTest } from "@src/entities/entities";
 
-import { ButtonsView } from "../ButtonsView";
+import { ButtonsView } from "@src/components/ButtonsView/ButtonsView";
 
-import { UiProvider, useUiContext } from "../../../contexts/UiContext";
+import { UiProvider, useUiContext } from "@src/contexts/UiContext";
 import {
   CalculatorProvider,
   useCalculatorContext,
-} from "../../../contexts/CalculatorContext";
-import { theme } from "../../../theme/theme";
+} from "@src/contexts/CalculatorContext";
+import { theme } from "@src/theme/theme";
 
 type RenderComponent = {} & GlobalTest;
 
