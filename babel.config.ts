@@ -1,5 +1,7 @@
-module.exports = function (api) {
-  api.cache(true);
+import type { ConfigAPI } from "@babel/core";
+
+export default function (api: ConfigAPI) {
+  api.cache.forever();
   return {
     presets: ["babel-preset-expo"],
     plugins: [
@@ -15,4 +17,4 @@ module.exports = function (api) {
       ],
     ],
   };
-};
+}
