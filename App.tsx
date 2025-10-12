@@ -1,10 +1,10 @@
 import React, { Fragment } from "react";
 import { StatusBar } from "expo-status-bar";
 
-import { Main } from "./src/components/Main/Main";
+import { MainPage } from "@src/pages/MainPage/MainPage";
 
-import { CalculatorProvider } from "./src/contexts/CalculatorContext";
-import { UiProvider } from "./src/contexts/UIContext";
+import { CalculatorProvider } from "@src/contexts/CalculatorContext";
+import { UiProvider } from "@src/contexts/NameChange";
 
 export default function App() {
   return (
@@ -12,7 +12,7 @@ export default function App() {
       <StatusBar style="light"></StatusBar>
       <CalculatorProvider>
         <UiProvider>
-          <Main></Main>
+          <MainPage></MainPage>
         </UiProvider>
       </CalculatorProvider>
     </Fragment>

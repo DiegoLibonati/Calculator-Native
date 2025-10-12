@@ -1,18 +1,11 @@
 import { createContext, useContext, useState } from "react";
 
-import {
-  CalculatorContext as CalculatorContextT,
-  CalculatorState,
-  Comma,
-  Number as NumberT,
-  Operation,
-} from "@src/entities/entities";
+import { CalculatorState } from "@src/entities/states";
+import { CalculatorContext as CalculatorContextT } from "@src/entities/contexts";
+import { Comma, Number as NumberT, Operation } from "@src/entities/app";
+import { CalculatorProviderProps } from "@src/entities/props";
 
 import { getIfLastCharIsAnOperation } from "@src/helpers/getIfLastCharIsAnOperation";
-
-interface CalculatorProviderProps {
-  children: React.ReactNode;
-}
 
 export const CalculatorContext = createContext<CalculatorContextT | null>(null);
 
@@ -171,5 +164,10 @@ export const CalculatorProvider = ({ children }: CalculatorProviderProps) => {
 };
 
 export const useCalculatorContext = (): CalculatorContextT => {
-  return useContext(CalculatorContext)!;
+  const context = useContext(CalculatorContext);
+  if (!context)
+    throw new Error(
+      "useCalculatorContext must be used within CalculatorProvider"
+    );
+  return context;
 };

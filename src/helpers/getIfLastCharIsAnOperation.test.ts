@@ -1,4 +1,4 @@
-import { Operation } from "@src/entities/entities";
+import { Operation } from "@src/entities/app";
 
 import { getIfLastCharIsAnOperation } from "@src/helpers/getIfLastCharIsAnOperation";
 
