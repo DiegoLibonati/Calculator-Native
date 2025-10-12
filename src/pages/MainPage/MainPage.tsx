@@ -4,7 +4,7 @@ import { Switch } from "@src/components/Switch/Switch";
 import { Screen } from "@src/components/Screen/Screen";
 import { ActionButtons } from "@src/components/ActionButtons/ActionButtons";
 
-import { useUiContext } from "@src/contexts/NameChange";
+import { useUiContext } from "@src/contexts/UiContext";
 
 import { theme } from "@src/styles/theme";
 

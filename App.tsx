@@ -4,7 +4,7 @@ import { StatusBar } from "expo-status-bar";
 import { MainPage } from "@src/pages/MainPage/MainPage";
 
 import { CalculatorProvider } from "@src/contexts/CalculatorContext";
-import { UiProvider } from "@src/contexts/NameChange";
+import { UiProvider } from "@src/contexts/UiContext";
 
 export default function App() {
   return (

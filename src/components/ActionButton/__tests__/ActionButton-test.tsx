@@ -4,7 +4,7 @@ import { GlobalTest } from "@src/entities/tests";
 
 import { ActionButton } from "@src/components/ActionButton/ActionButton";
 
-import { UiProvider, useUiContext } from "@src/contexts/NameChange";
+import { UiProvider, useUiContext } from "@src/contexts/UiContext";
 
 import { theme } from "@src/styles/theme";
 

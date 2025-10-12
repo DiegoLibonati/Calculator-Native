@@ -4,7 +4,7 @@ import { GlobalTest } from "@src/entities/tests";
 
 import { Switch } from "@src/components/Switch/Switch";
 
-import { UiProvider, useUiContext } from "@src/contexts/NameChange";
+import { UiProvider, useUiContext } from "@src/contexts/UiContext";
 
 type RenderComponent = {} & GlobalTest;
 

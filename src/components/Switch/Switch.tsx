@@ -1,7 +1,7 @@
 import { StyleSheet, Switch as SwitchNative, View } from "react-native";
 import Constants from "expo-constants";
 
-import { useUiContext } from "@src/contexts/NameChange";
+import { useUiContext } from "@src/contexts/UiContext";
 
 import { theme } from "@src/styles/theme";
 

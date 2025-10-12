@@ -4,7 +4,7 @@ import { ActionButtonsRow } from "@src/components/ActionButtonsRow/ActionButtons
 import { ActionButton } from "@src/components/ActionButton/ActionButton";
 
 import { useCalculatorContext } from "@src/contexts/CalculatorContext";
-import { useUiContext } from "@src/contexts/NameChange";
+import { useUiContext } from "@src/contexts/UiContext";
 
 import { theme } from "@src/styles/theme";
 

@@ -4,7 +4,7 @@ import { GlobalTest } from "@src/entities/tests";
 
 import { MainPage } from "@src/pages/MainPage/MainPage";
 
-import { UiProvider, useUiContext } from "@src/contexts/NameChange";
+import { UiProvider, useUiContext } from "@src/contexts/UiContext";
 import { CalculatorProvider } from "@src/contexts/CalculatorContext";
 
 import { theme } from "@src/styles/theme";
