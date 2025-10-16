@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from "react-native";
 
-import { useCalculatorContext } from "@src/contexts/CalculatorContext";
+import { useCalculatorContext } from "@src/hooks/useCalculatorContext";
 
 import { theme } from "@src/styles/theme";
 

@@ -4,11 +4,11 @@ import { GlobalTest } from "@src/entities/tests";
 
 import { ActionButtons } from "@src/components/ActionButtons/ActionButtons";
 
-import { UiProvider, useUiContext } from "@src/contexts/UiContext";
-import {
-  CalculatorProvider,
-  useCalculatorContext,
-} from "@src/contexts/CalculatorContext";
+import { UiProvider } from "@src/contexts/UiContext";
+import { CalculatorProvider } from "@src/contexts/CalculatorContext";
+
+import { useUiContext } from "@src/hooks/useUiContext";
+import { useCalculatorContext } from "@src/hooks/useCalculatorContext";
 
 import { theme } from "@src/styles/theme";
 
@@ -33,13 +33,11 @@ const renderComponent = (): RenderComponent => {
   };
 };
 
-jest.mock("@src/contexts/UiContext", () => ({
-  ...jest.requireActual("@src/contexts/UiContext"),
+jest.mock("@src/hooks/useUiContext", () => ({
   useUiContext: jest.fn(),
 }));
 
-jest.mock("@src/contexts/CalculatorContext", () => ({
-  ...jest.requireActual("@src/contexts/CalculatorContext"),
+jest.mock("@src/hooks/useCalculatorContext", () => ({
   useCalculatorContext: jest.fn(),
 }));
 

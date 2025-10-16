@@ -3,8 +3,8 @@ import { StyleSheet, View } from "react-native";
 import { ActionButtonsRow } from "@src/components/ActionButtonsRow/ActionButtonsRow";
 import { ActionButton } from "@src/components/ActionButton/ActionButton";
 
-import { useCalculatorContext } from "@src/contexts/CalculatorContext";
-import { useUiContext } from "@src/contexts/UiContext";
+import { useUiContext } from "@src/hooks/useUiContext";
+import { useCalculatorContext } from "@src/hooks/useCalculatorContext";
 
 import { theme } from "@src/styles/theme";
 

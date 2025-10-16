@@ -2,7 +2,7 @@ import { StyleSheet, Text, TouchableOpacity } from "react-native";
 
 import { ActionButtonProps } from "@src/entities/props";
 
-import { useUiContext } from "@src/contexts/UiContext";
+import { useUiContext } from "@src/hooks/useUiContext";
 
 import { theme } from "@src/styles/theme";
 

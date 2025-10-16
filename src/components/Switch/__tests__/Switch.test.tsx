@@ -4,7 +4,9 @@ import { GlobalTest } from "@src/entities/tests";
 
 import { Switch } from "@src/components/Switch/Switch";
 
-import { UiProvider, useUiContext } from "@src/contexts/UiContext";
+import { UiProvider } from "@src/contexts/UiContext";
+
+import { useUiContext } from "@src/hooks/useUiContext";
 
 type RenderComponent = {} & GlobalTest;
 
@@ -25,8 +27,7 @@ const renderComponent = (): RenderComponent => {
   };
 };
 
-jest.mock("@src/contexts/UiContext", () => ({
-  ...jest.requireActual("@src/contexts/UiContext"),
+jest.mock("@src/hooks/useUiContext", () => ({
   useUiContext: jest.fn(),
 }));
 

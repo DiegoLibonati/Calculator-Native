@@ -5,10 +5,9 @@ import { GlobalTest } from "@src/entities/tests";
 
 import { Screen } from "@src/components/Screen/Screen";
 
-import {
-  CalculatorProvider,
-  useCalculatorContext,
-} from "@src/contexts/CalculatorContext";
+import { CalculatorProvider } from "@src/contexts/CalculatorContext";
+
+import { useCalculatorContext } from "@src/hooks/useCalculatorContext";
 
 type RenderComponent = {} & GlobalTest;
 
@@ -29,8 +28,7 @@ const renderComponent = (): RenderComponent => {
   };
 };
 
-jest.mock("@src/contexts/CalculatorContext", () => ({
-  ...jest.requireActual("@src/contexts/CalculatorContext"),
+jest.mock("@src/hooks/useCalculatorContext", () => ({
   useCalculatorContext: jest.fn(),
 }));
 

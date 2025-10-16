@@ -162,12 +162,3 @@ export const CalculatorProvider = ({ children }: CalculatorProviderProps) => {
     </CalculatorContext.Provider>
   );
 };
-
-export const useCalculatorContext = (): CalculatorContextT => {
-  const context = useContext(CalculatorContext);
-  if (!context)
-    throw new Error(
-      "useCalculatorContext must be used within CalculatorProvider"
-    );
-  return context;
-};
