@@ -15,21 +15,15 @@ const ActionButton = ({
 }: ActionButtonProps): JSX.Element => {
   const { uiState } = useUiContext();
 
+  const colors = uiState.isDarkModeEnabled ? theme.colors.dark : theme.colors.light;
+
   return (
     <TouchableOpacity
-      style={[
-        styles.container,
-        {
-          backgroundColor: uiState.isDarkModeEnabled
-            ? theme.background.dark.secondary
-            : theme.background.light.secondary,
-          ...containerStyle,
-        },
-      ]}
+      style={[styles.container, { backgroundColor: colors.background.input }, containerStyle]}
       testID={`root-touchable-button-${text}`}
       onPress={onPressButton}
     >
-      <Text style={[styles.buttonText, { ...textStyle }]}>{text}</Text>
+      <Text style={[styles.buttonText, { color: colors.text.primary }, textStyle]}>{text}</Text>
     </TouchableOpacity>
   );
 };
@@ -43,7 +37,6 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: 30,
-    color: theme.colors.white,
   },
 });
 

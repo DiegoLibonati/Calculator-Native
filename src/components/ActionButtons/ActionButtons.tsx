@@ -20,6 +20,8 @@ const ActionButtons = (): JSX.Element => {
     handleNumberConvert,
   } = useCalculatorContext();
 
+  const colors = uiState.isDarkModeEnabled ? theme.colors.dark : theme.colors.light;
+
   return (
     <View style={styles.container} testID="buttons-root-view">
       <ActionButtonsRow>
@@ -139,12 +141,8 @@ const ActionButtons = (): JSX.Element => {
           onPressButton={() => {
             handleGetEqual();
           }}
-          containerStyle={{
-            backgroundColor: uiState.isDarkModeEnabled
-              ? theme.background.dark.primary
-              : theme.background.light.primary,
-          }}
-          textStyle={{ color: theme.colors.white }}
+          containerStyle={{ backgroundColor: colors.primary }}
+          textStyle={{ color: colors.text.inverse }}
         ></ActionButton>
       </ActionButtonsRow>
     </View>

@@ -5,12 +5,15 @@ import type { RenderAPI } from "@testing-library/react-native";
 import Screen from "@/components/Screen/Screen";
 
 import { CalculatorProvider } from "@/contexts/CalculatorContext/CalculatorProvider";
+import { UiProvider } from "@/contexts/UiContext/UiProvider";
 
 const renderComponent = (): RenderAPI =>
   render(
-    <CalculatorProvider>
-      <Screen />
-    </CalculatorProvider>
+    <UiProvider>
+      <CalculatorProvider>
+        <Screen />
+      </CalculatorProvider>
+    </UiProvider>
   );
 
 describe("Screen", () => {

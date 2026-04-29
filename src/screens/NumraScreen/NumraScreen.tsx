@@ -13,16 +13,11 @@ import { theme } from "@/styles/theme";
 const NumraScreen = (): JSX.Element => {
   const { uiState } = useUiContext();
 
+  const colors = uiState.isDarkModeEnabled ? theme.colors.dark : theme.colors.light;
+
   return (
     <View
-      style={[
-        styles.container,
-        {
-          backgroundColor: uiState.isDarkModeEnabled
-            ? theme.background.dark.primary
-            : theme.background.light.primary,
-        },
-      ]}
+      style={[styles.container, { backgroundColor: colors.background.screen }]}
       testID="main-root"
     >
       <Switch></Switch>
