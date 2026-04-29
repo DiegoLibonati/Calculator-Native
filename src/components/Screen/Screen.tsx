@@ -12,11 +12,17 @@ const Screen = (): JSX.Element => {
   const { uiState } = useUiContext();
 
   const { screen } = calculatorState;
-  const colors = uiState.isDarkModeEnabled ? theme.colors.dark : theme.colors.light;
 
   return (
     <View style={styles.container} testID="screen-root-view">
-      <Text style={[styles.text, { color: colors.text.primary }]}>{screen}</Text>
+      <Text
+        style={[
+          styles.text,
+          { color: uiState.isDarkModeEnabled ? theme.colors.white : theme.colors.black },
+        ]}
+      >
+        {screen}
+      </Text>
     </View>
   );
 };

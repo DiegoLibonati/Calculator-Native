@@ -17,7 +17,10 @@ const NumraScreen = (): JSX.Element => {
 
   return (
     <View
-      style={[styles.container, { backgroundColor: colors.background.screen }]}
+      style={[
+        styles.container,
+        { backgroundColor: uiState.isDarkModeEnabled ? colors.primary : colors.tertiary },
+      ]}
       testID="main-root"
     >
       <Switch></Switch>

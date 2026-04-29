@@ -19,11 +19,19 @@ const ActionButton = ({
 
   return (
     <TouchableOpacity
-      style={[styles.container, { backgroundColor: colors.background.input }, containerStyle]}
+      style={[styles.container, { backgroundColor: colors.secondary }, containerStyle]}
       testID={`root-touchable-button-${text}`}
       onPress={onPressButton}
     >
-      <Text style={[styles.buttonText, { color: colors.text.primary }, textStyle]}>{text}</Text>
+      <Text
+        style={[
+          styles.buttonText,
+          { color: uiState.isDarkModeEnabled ? theme.colors.white : theme.colors.black },
+          textStyle,
+        ]}
+      >
+        {text}
+      </Text>
     </TouchableOpacity>
   );
 };

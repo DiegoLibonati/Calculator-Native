@@ -141,8 +141,10 @@ const ActionButtons = (): JSX.Element => {
           onPressButton={() => {
             handleGetEqual();
           }}
-          containerStyle={{ backgroundColor: colors.primary }}
-          textStyle={{ color: colors.text.inverse }}
+          containerStyle={{
+            backgroundColor: uiState.isDarkModeEnabled ? colors.quaternary : colors.primary,
+          }}
+          textStyle={{ color: theme.colors.white }}
         ></ActionButton>
       </ActionButtonsRow>
     </View>

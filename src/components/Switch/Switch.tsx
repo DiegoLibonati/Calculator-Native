@@ -16,10 +16,10 @@ const Switch = (): JSX.Element => {
     <View style={styles.container} testID="switch-root-view">
       <SwitchNative
         trackColor={{
-          true: colors.primary,
-          false: colors.border.default,
+          true: uiState.isDarkModeEnabled ? colors.quaternary : colors.primary,
+          false: uiState.isDarkModeEnabled ? colors.tertiary : colors.secondary,
         }}
-        thumbColor={colors.text.inverse}
+        thumbColor={theme.colors.white}
         onValueChange={uiState.isDarkModeEnabled ? disableDarkMode : enableDarkMode}
         value={uiState.isDarkModeEnabled}
       ></SwitchNative>
