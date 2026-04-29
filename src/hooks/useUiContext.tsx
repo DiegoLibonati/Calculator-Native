@@ -1,8 +1,8 @@
 import { useContext } from "react";
 
-import { UseUiContext } from "@src/entities/hooks";
+import type { UseUiContext } from "@/types/hooks";
 
-import { UiContext } from "@src/contexts/UiContext";
+import { UiContext } from "@/contexts/UiContext/UiContext";
 
 export const useUiContext = (): UseUiContext => {
   const context = useContext(UiContext);

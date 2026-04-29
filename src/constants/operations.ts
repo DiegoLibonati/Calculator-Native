@@ -1,4 +1,4 @@
-import { Operation } from "@src/entities/app";
+import type { Operation } from "@/types/app";
 
 const operations: Operation[] = ["*", "+", "%", "-", "/"];
 

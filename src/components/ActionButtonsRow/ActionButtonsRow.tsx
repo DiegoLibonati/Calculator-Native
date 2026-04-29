@@ -1,8 +1,9 @@
 import { Dimensions, StyleSheet, View } from "react-native";
 
-import { ActionButtonsRowProps } from "@src/entities/props";
+import type { JSX } from "react";
+import type { ActionButtonsRowProps } from "@/types/props";
 
-export const ActionButtonsRow = ({ children }: ActionButtonsRowProps) => {
+const ActionButtonsRow = ({ children }: ActionButtonsRowProps): JSX.Element => {
   return (
     <View style={styles.container} testID="buttons-row-root">
       {children}
@@ -18,3 +19,5 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
 });
+
+export default ActionButtonsRow;

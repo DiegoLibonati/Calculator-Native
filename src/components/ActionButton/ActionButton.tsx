@@ -1,17 +1,18 @@
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
 
-import { ActionButtonProps } from "@src/entities/props";
+import type { JSX } from "react";
+import type { ActionButtonProps } from "@/types/props";
 
-import { useUiContext } from "@src/hooks/useUiContext";
+import { useUiContext } from "@/hooks/useUiContext";
 
-import { theme } from "@src/styles/theme";
+import { theme } from "@/styles/theme";
 
-export const ActionButton = ({
+const ActionButton = ({
   text,
   containerStyle,
   textStyle,
   onPressButton,
-}: ActionButtonProps) => {
+}: ActionButtonProps): JSX.Element => {
   const { uiState } = useUiContext();
 
   return (
@@ -20,8 +21,8 @@ export const ActionButton = ({
         styles.container,
         {
           backgroundColor: uiState.isDarkModeEnabled
-            ? theme.background.secondaryDark
-            : theme.background.secondaryLight,
+            ? theme.background.dark.secondary
+            : theme.background.light.secondary,
           ...containerStyle,
         },
       ]}
@@ -45,3 +46,5 @@ const styles = StyleSheet.create({
     color: theme.colors.white,
   },
 });
+
+export default ActionButton;

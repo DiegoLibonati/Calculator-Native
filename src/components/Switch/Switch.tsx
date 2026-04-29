@@ -1,11 +1,13 @@
 import { StyleSheet, Switch as SwitchNative, View } from "react-native";
 import Constants from "expo-constants";
 
-import { useUiContext } from "@src/hooks/useUiContext";
+import type { JSX } from "react";
 
-import { theme } from "@src/styles/theme";
+import { useUiContext } from "@/hooks/useUiContext";
 
-export const Switch = () => {
+import { theme } from "@/styles/theme";
+
+const Switch = (): JSX.Element => {
   const { uiState, enableDarkMode, disableDarkMode } = useUiContext();
 
   return (
@@ -15,12 +17,8 @@ export const Switch = () => {
           true: theme.constants.black,
           false: theme.constants.white,
         }}
-        thumbColor={
-          uiState.isDarkModeEnabled ? theme.dot.dark : theme.dot.light
-        }
-        onValueChange={
-          uiState.isDarkModeEnabled ? disableDarkMode : enableDarkMode
-        }
+        thumbColor={uiState.isDarkModeEnabled ? theme.dot.dark : theme.dot.light}
+        onValueChange={uiState.isDarkModeEnabled ? disableDarkMode : enableDarkMode}
         value={uiState.isDarkModeEnabled}
       ></SwitchNative>
     </View>
@@ -34,3 +32,5 @@ const styles = StyleSheet.create({
     alignSelf: "flex-start",
   },
 });
+
+export default Switch;

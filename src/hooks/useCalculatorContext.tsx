@@ -1,14 +1,11 @@
 import { useContext } from "react";
 
-import { UseCalculatorContext } from "@src/entities/hooks";
+import type { UseCalculatorContext } from "@/types/hooks";
 
-import { CalculatorContext } from "@src/contexts/CalculatorContext";
+import { CalculatorContext } from "@/contexts/CalculatorContext/CalculatorContext";
 
 export const useCalculatorContext = (): UseCalculatorContext => {
   const context = useContext(CalculatorContext);
-  if (!context)
-    throw new Error(
-      "useCalculatorContext must be used within CalculatorProvider"
-    );
+  if (!context) throw new Error("useCalculatorContext must be used within CalculatorProvider");
   return context;
 };

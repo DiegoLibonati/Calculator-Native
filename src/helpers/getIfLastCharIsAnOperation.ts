@@ -1,7 +1,7 @@
-import { Operation } from "@src/entities/app";
+import type { Operation } from "@/types/app";
 
-import operations from "@src/constants/operations";
+import operations from "@/constants/operations";
 
-export const getIfLastCharIsAnOperation = (char: string) => {
+export const getIfLastCharIsAnOperation = (char: string): boolean => {
   return operations.includes(char as Operation);
 };

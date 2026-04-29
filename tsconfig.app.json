@@ -1,18 +1,14 @@
 {
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
-    "noEmit": true,
-    "types": ["node"]
+    "types": ["react-native", "node"]
   },
-  "include": ["src", "App.tsx"],
+  "include": ["src", "app"],
   "exclude": [
     "node_modules",
     "dist",
-    "tests",
     "**/*.test.ts",
     "**/*.test.tsx",
-    "**/*-test.ts",
-    "**/*-test.tsx",
     "**/*.spec.ts",
     "**/*.spec.tsx"
   ]

@@ -1,4 +1,4 @@
-# Calculator Native
+# Numra
 
 ## Educational Purpose
 
@@ -8,76 +8,109 @@ The main goal is to explore and demonstrate best practices, patterns, and techno
 
 ## Getting Started
 
-1. Clone the repository on your computer using: `git clone URL`.
-2. Go to the APP directory.
-3. Execute: `yarn install` or `npm install`
-4. Execute: `yarn run start` or `npm run start` and select the desired option!
+1. Clone the repository
+2. Navigate to the project folder
+3. Execute: `npm install`
+4. Execute: `npm start`
 
-- If you don't have expo and an Android simulator installed, search for a tutorial on YouTube.
+Install **Expo Go** on your device ([Android](https://play.google.com/store/apps/details?id=host.exp.exponent) / [iOS](https://apps.apple.com/app/expo-go/id982107779)) and scan the QR code that appears in the terminal.
 
 ## Description
 
-This application is made with react native. It is a calculator that allows to:
+**Numra** is a mobile calculator application built with React Native and Expo, designed to run on both Android and iOS from a single codebase. It covers the full set of everyday arithmetic operations — addition, subtraction, multiplication, division, and percentage — as well as sign inversion (positive/negative toggle) and a one-tap reset to clear the screen back to zero.
 
-1. Change the theme from light to dark
-2. Add
-3. Subtract
-4. Multiply
-5. Divide
-6. Change from positive to negative and vice versa
-7. Return to 0
-8. Get the percentage
+Beyond the math, Numra ships with a dual-theme system. Users can switch at any time between a warm light mode (soft beige tones: `#DBC8AC` / `#EDDBC0`) and a deep dark mode (rich purple tones: `#453C67` / `#6D67E4`), toggled through a switch in the top-left corner. The chosen palette is applied consistently across the background, buttons, and interactive elements, giving the app a cohesive visual identity in both modes.
 
-It is my first native application. The first of hopefully many :D
+The codebase is written entirely in TypeScript and follows a component-driven architecture with a clear separation between UI components, screen-level layout, context-based state management (calculator logic and UI state live in independent React contexts), custom hooks, and a centralized theme system. The theme is structured as a two-layer token model: a flat `palette` of raw color values and a semantic `theme` object that maps those colors to roles (`background.light.primary`, `background.dark.secondary`, etc.), making future visual changes straightforward to apply globally.
+
+The project also includes a test suite built with Jest and React Native Testing Library, covering unit and component-level behavior.
 
 ## Technologies used
 
 1. React Native
-2. Typescript
-3. CSS
-4. Expo
+2. TypeScript
+3. Expo SDK 54
+4. expo-router
 
 ## Libraries used
 
 #### Dependencies
 
 ```
-"expo": "^54.0.0"
-"expo-constants": "^18.0.9"
-"expo-status-bar": "~3.0.8"
+"expo": "~54.0.0"
+"expo-constants": "~18.0.13"
+"expo-linking": "~8.0.12"
+"expo-router": "~6.0.23"
+"expo-status-bar": "~3.0.9"
 "react": "19.1.0"
-"react-native": "0.81.4"
+"react-native": "0.81.5"
+"react-native-safe-area-context": "~5.6.0"
+"react-native-screens": "~4.16.0"
 ```
 
 #### devDependencies
 
 ```
 "@babel/core": "^7.20.0"
-"@testing-library/jest-native": "^5.4.3"
+"@eslint/js": "^9.0.0"
 "@testing-library/react-native": "^12.1.2"
-"@types/jest": "^29.5.13"
-"@types/node": "^20.10.6"
+"@types/jest": "~29.5.14"
+"@types/node": "^22.0.0"
 "@types/react": "~19.1.10"
 "babel-plugin-module-resolver": "^5.0.2"
-"babel-preset-expo": "^54.0.1"
-"jest": "^29.7.0"
-"jest-expo": "~54.0.11"
+"babel-preset-expo": "~54.0.1"
+"eslint": "^9.0.0"
+"eslint-config-prettier": "^9.0.0"
+"eslint-plugin-prettier": "^5.5.5"
+"eslint-plugin-react-hooks": "^5.0.0"
+"globals": "^15.0.0"
+"husky": "^9.0.0"
+"jest": "~29.7.0"
+"jest-expo": "~54.0.0"
+"lint-staged": "^15.0.0"
+"prettier": "^3.0.0"
 "react-test-renderer": "19.1.0"
-"ts-node": "^10.9.2"
-"typescript": "^5.1.3"
+"typescript": "^5.2.2"
+"typescript-eslint": "^8.0.0"
 ```
 
 ## Portfolio Link
 
-[`https://www.diegolibonati.com.ar/#/project/Calculator-Native`](https://www.diegolibonati.com.ar/#/project/Calculator-Native)
-
-## Video
-
-https://user-images.githubusercontent.com/99032604/231316735-6d3a4f64-2b06-47e5-8cea-b51ba245bb0e.mp4
+[`https://www.diegolibonati.com.ar/#/project/numra`](https://www.diegolibonati.com.ar/#/project/numra)
 
 ## Testing
 
-1. Join to the correct path of the clone
-2. Execute: `yarn test` or `npm test`
+1. Navigate to the project folder
+2. Execute: `npm test`
+
+For coverage report:
+
+```bash
+npm run test:coverage
+```
+
+## Security
+
+### npm audit
+
+Check for vulnerabilities in dependencies:
+
+```bash
+npm audit
+```
+
+### Expo Doctor
+
+Run a full health check on the project (dependency versions, SDK compatibility, configuration):
+
+```bash
+npm run doctor
+```
 
 ## Known Issues
+
+Running `npm audit` reports vulnerabilities in `@tootallnate/once`, `postcss`, and `uuid`. All of them are transitive dependencies of Expo's internal toolchain — specifically `jest-expo`, `@expo/cli`, `@expo/metro-config`, and `@expo/config-plugins`. None of these packages are included in the app bundle delivered to end users; they run exclusively on the developer's machine during build and test.
+
+The suggested fix (`npm audit fix --force`) would downgrade `expo` to v49 and `jest-expo` to v47, both of which are incompatible with the current SDK. Do not run it.
+
+This is a known limitation of the Expo ecosystem tracked upstream. The vulnerabilities will be resolved when Expo updates its internal dependencies. No action is required on the project side.

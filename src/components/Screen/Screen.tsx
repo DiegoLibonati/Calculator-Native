@@ -1,10 +1,12 @@
 import { StyleSheet, Text, View } from "react-native";
 
-import { useCalculatorContext } from "@src/hooks/useCalculatorContext";
+import type { JSX } from "react";
 
-import { theme } from "@src/styles/theme";
+import { useCalculatorContext } from "@/hooks/useCalculatorContext";
 
-export const Screen = () => {
+import { theme } from "@/styles/theme";
+
+const Screen = (): JSX.Element => {
   const { calculatorState } = useCalculatorContext();
 
   const { screen } = calculatorState;
@@ -28,3 +30,5 @@ const styles = StyleSheet.create({
     color: theme.colors.white,
   },
 });
+
+export default Screen;

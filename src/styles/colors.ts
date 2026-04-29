@@ -1,6 +1,8 @@
-const colors = {
-  white: "#fff",
-  black: "#000",
+export const palette = {
+  white: "#FFFFFF",
+  black: "#000000",
+  primaryLight: "#DBC8AC",
+  secondaryLight: "#EDDBC0",
+  primaryDark: "#453C67",
+  secondaryDark: "#6D67E4",
 };
-
-export default colors;
