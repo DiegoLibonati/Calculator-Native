@@ -6,15 +6,6 @@ This project was created primarily for **educational and learning purposes**.
 While it is well-structured and could technically be used in production, it is **not intended for commercialization**.  
 The main goal is to explore and demonstrate best practices, patterns, and technologies in software development.
 
-## Getting Started
-
-1. Clone the repository
-2. Navigate to the project folder
-3. Execute: `npm install`
-4. Execute: `npm start`
-
-Install **Expo Go** on your device ([Android](https://play.google.com/store/apps/details?id=host.exp.exponent) / [iOS](https://apps.apple.com/app/expo-go/id982107779)) and scan the QR code that appears in the terminal.
-
 ## Description
 
 **Numra** is a mobile calculator application built with React Native and Expo, designed to run on both Android and iOS from a single codebase. It covers the full set of everyday arithmetic operations — addition, subtraction, multiplication, division, and percentage — as well as sign inversion (positive/negative toggle) and a one-tap reset to clear the screen back to zero.
@@ -74,11 +65,20 @@ The project also includes a test suite built with Jest and React Native Testing 
 "typescript-eslint": "^8.0.0"
 ```
 
-## Portfolio Link
+## Getting Started
 
-[`https://www.diegolibonati.com.ar/#/project/numra`](https://www.diegolibonati.com.ar/#/project/numra)
+With the stack in mind, follow these steps to run Numra locally:
+
+1. Clone the repository
+2. Navigate to the project folder
+3. Execute: `npm install`
+4. Execute: `npm start`
+
+Install **Expo Go** on your device ([Android](https://play.google.com/store/apps/details?id=host.exp.exponent) / [iOS](https://apps.apple.com/app/expo-go/id982107779)) and scan the QR code that appears in the terminal.
 
 ## Testing
+
+Once the app runs, you can verify its behavior with the included test suite (Jest + React Native Testing Library):
 
 1. Navigate to the project folder
 2. Execute: `npm test`
@@ -89,7 +89,9 @@ For coverage report:
 npm run test:coverage
 ```
 
-## Security
+## Security Audit
+
+Beyond functional tests, the project ships with tooling to audit dependency health and SDK compatibility.
 
 ### npm audit
 
@@ -109,8 +111,14 @@ npm run doctor
 
 ## Known Issues
 
+Some warnings reported by the audit tools above are expected and tracked upstream — details below.
+
 Running `npm audit` reports vulnerabilities in `@tootallnate/once`, `postcss`, and `uuid`. All of them are transitive dependencies of Expo's internal toolchain — specifically `jest-expo`, `@expo/cli`, `@expo/metro-config`, and `@expo/config-plugins`. None of these packages are included in the app bundle delivered to end users; they run exclusively on the developer's machine during build and test.
 
 The suggested fix (`npm audit fix --force`) would downgrade `expo` to v49 and `jest-expo` to v47, both of which are incompatible with the current SDK. Do not run it.
 
 This is a known limitation of the Expo ecosystem tracked upstream. The vulnerabilities will be resolved when Expo updates its internal dependencies. No action is required on the project side.
+
+## Portfolio Link
+
+[`https://www.diegolibonati.com.ar/#/project/numra`](https://www.diegolibonati.com.ar/#/project/numra)
