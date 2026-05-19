@@ -8,7 +8,7 @@ The main goal is to explore and demonstrate best practices, patterns, and techno
 
 ## Description
 
-**Numra** is a mobile calculator application built with React Native and Expo, designed to run on both Android and iOS from a single codebase. It covers the full set of everyday arithmetic operations — addition, subtraction, multiplication, division, and percentage — as well as sign inversion (positive/negative toggle) and a one-tap reset to clear the screen back to zero.
+**Numra** is a cross-platform calculator application built with React Native and Expo, designed to run on Android, iOS, and Web from a single codebase. It covers the full set of everyday arithmetic operations — addition, subtraction, multiplication, division, and percentage — as well as sign inversion (positive/negative toggle) and a one-tap reset to clear the screen back to zero.
 
 Beyond the math, Numra ships with a dual-theme system. Users can switch at any time between a warm light mode (soft beige tones: `#DBC8AC` / `#EDDBC0`) and a deep dark mode (rich purple tones: `#453C67` / `#6D67E4`), toggled through a switch in the top-left corner. The chosen palette is applied consistently across the background, buttons, and interactive elements, giving the app a cohesive visual identity in both modes.
 
@@ -34,9 +34,11 @@ The project also includes a test suite built with Jest and React Native Testing 
 "expo-router": "~6.0.23"
 "expo-status-bar": "~3.0.9"
 "react": "19.1.0"
+"react-dom": "19.1.0"
 "react-native": "0.81.5"
 "react-native-safe-area-context": "~5.6.0"
 "react-native-screens": "~4.16.0"
+"react-native-web": "^0.21.0"
 ```
 
 #### devDependencies
@@ -67,6 +69,13 @@ The project also includes a test suite built with Jest and React Native Testing 
 
 ## Getting Started
 
+### Prerequisites
+
+- **Node.js 22** (pinned via [`.nvmrc`](.nvmrc)). If you use `nvm`, run `nvm use` from the project root.
+- **npm** (the project ships with `package-lock.json` and `engine-strict=true`).
+
+### Run locally
+
 With the stack in mind, follow these steps to run Numra locally:
 
 1. Clone the repository
@@ -74,7 +83,7 @@ With the stack in mind, follow these steps to run Numra locally:
 3. Execute: `npm install`
 4. Execute: `npm start`
 
-Install **Expo Go** on your device ([Android](https://play.google.com/store/apps/details?id=host.exp.exponent) / [iOS](https://apps.apple.com/app/expo-go/id982107779)) and scan the QR code that appears in the terminal.
+Install **Expo Go** on your device ([Android](https://play.google.com/store/apps/details?id=host.exp.exponent) / [iOS](https://apps.apple.com/app/expo-go/id982107779)) and scan the QR code that appears in the terminal. To run on the web, execute `npm run web`.
 
 ## Testing
 
@@ -87,6 +96,68 @@ For coverage report:
 
 ```bash
 npm run test:coverage
+```
+
+## Continuous Integration
+
+The repository ships with a **GitHub Actions** pipeline defined in [`.github/workflows/ci.yml`](.github/workflows/ci.yml). It runs automatically on every `push` and `pull_request` targeting the `main` branch, validating the codebase end-to-end on a fresh Ubuntu runner before anything reaches `main`.
+
+### Pipeline overview
+
+```
+                      ┌─── PR or push to main ───┐
+                      ▼                          ▼
+┌──────────────────────┐  ┌──────────────────┐  ┌──────────────────────┐
+│    lint-and-audit    │─▶│      testing     │─▶│        bundle        │
+│ eslint · tsc · format│  │ jest (rn + ts)   │  │ expo export (all)    │
+└──────────────────────┘  └──────────────────┘  └──────────────────────┘
+                                                          │
+                                                          ▼
+                                                ┌──────────────────────┐
+                                                │      expo-doctor     │
+                                                │ SDK & deps health    │
+                                                └──────────────────────┘
+```
+
+Each job declares `needs: <previous>`, so the pipeline short-circuits on the first failure and never wastes minutes building or doctoring a broken commit.
+
+### Validation jobs
+
+1. **`lint-and-audit`** — runs `npm run lint` (ESLint over `src`, `app`, `__tests__`), `npm run typecheck` (`tsc -p tsconfig.app.json --noEmit`) and `npm run format:check` (Prettier in check mode).
+2. **`testing`** — runs the full Jest suite via `npm run test`, using `jest-expo` as the preset and `@testing-library/react-native` for component-level assertions.
+3. **`bundle`** — runs `npx expo export --platform all` to produce a static bundle for Android, iOS and Web. The resulting `dist/` directory is uploaded as a workflow artifact named `expo-dist` with a 7-day retention.
+4. **`expo-doctor`** — runs `npm run doctor` (`npx expo-doctor`) to verify SDK compatibility, dependency version drift and configuration health.
+
+### Node version alignment
+
+The Node.js version is pinned via [`.nvmrc`](.nvmrc) (currently `22`) and consumed by `actions/setup-node` through `node-version-file: .nvmrc`, so CI and local environments always agree. The same file is used locally with `nvm use`, and [`.npmrc`](.npmrc) sets `engine-strict=true` so a mismatched Node version fails fast on `npm install` instead of surfacing as a confusing runtime error later.
+
+### Where the build outputs live
+
+| Output                                                   | Location                                                           |
+| -------------------------------------------------------- | ------------------------------------------------------------------ |
+| Validation logs (lint, typecheck, format, tests, doctor) | **Actions** tab on GitHub                                          |
+| `dist/` bundle produced by `expo export`                 | Uploaded as the `expo-dist` artifact on each run (7-day retention) |
+| Native binaries (`.apk` / `.aab` / `.ipa`)               | Not produced by CI — built on demand via EAS Build                 |
+
+> **Note:** GitHub's **Packages** section is for package registries (npm, PyPI, Docker, etc.) and does not host Expo bundles. Static web/native bundles always live under the workflow run's **Artifacts** sidebar.
+
+### Running the same checks locally
+
+```bash
+# lint-and-audit
+npm run lint
+npm run typecheck
+npm run format:check
+
+# testing
+npm run test
+
+# bundle
+npx expo export --platform all
+
+# expo-doctor
+npm run doctor
 ```
 
 ## Security Audit

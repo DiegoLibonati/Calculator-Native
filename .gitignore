@@ -32,12 +32,13 @@ npm-debug.*
 *.key
 *.mobileprovision
 
+# Google Play service account (used by EAS submit; never commit)
+google-service-account.json
+**/google-service-account*.json
+
 # Merge artifacts
 *.orig.*
 
 # macOS
 .DS_Store
 
-# Lock files (cada proyecto maneja el suyo)
-package-lock.json
-yarn.lock

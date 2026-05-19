@@ -14,8 +14,8 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "prebuild": "expo prebuild",
-    "lint": "eslint src app",
-    "lint:fix": "eslint src app --fix",
+    "lint": "eslint src app __tests__",
+    "lint:fix": "eslint src app __tests__ --fix",
     "lint:all": "eslint src app __tests__ --fix",
     "format": "prettier --write \"src/**/*.{ts,tsx}\" \"app/**/*.{ts,tsx}\"",
     "format:check": "prettier --check \"src/**/*.{ts,tsx}\" \"app/**/*.{ts,tsx}\"",
@@ -24,8 +24,11 @@
     "test:watch": "jest --watchAll --verbose",
     "test:coverage": "jest --coverage",
     "typecheck": "tsc -p tsconfig.app.json --noEmit",
-    "doctor": "expo doctor",
+    "doctor": "npx expo-doctor",
     "prepare": "husky"
+  },
+  "overrides": {
+    "react-dom": "19.1.0"
   },
   "dependencies": {
     "expo": "~54.0.0",
@@ -34,9 +37,11 @@
     "expo-router": "~6.0.23",
     "expo-status-bar": "~3.0.9",
     "react": "19.1.0",
+    "react-dom": "19.1.0",
     "react-native": "0.81.5",
     "react-native-safe-area-context": "~5.6.0",
-    "react-native-screens": "~4.16.0"
+    "react-native-screens": "~4.16.0",
+    "react-native-web": "^0.21.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
