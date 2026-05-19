@@ -15,7 +15,7 @@
     "web": "expo start --web",
     "prebuild": "expo prebuild",
     "lint": "eslint src app __tests__",
-    "lint:fix": "eslint src app __tests__ --fix",
+    "lint:fix": "eslint src app --fix",
     "lint:all": "eslint src app __tests__ --fix",
     "format": "prettier --write \"src/**/*.{ts,tsx}\" \"app/**/*.{ts,tsx}\"",
     "format:check": "prettier --check \"src/**/*.{ts,tsx}\" \"app/**/*.{ts,tsx}\"",
