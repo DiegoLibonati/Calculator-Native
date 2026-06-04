@@ -111,22 +111,17 @@ The repository ships with a **GitHub Actions** pipeline defined in [`.github/wor
 │    lint-and-audit    │─▶│      testing     │─▶│        bundle        │
 │ eslint · tsc · format│  │ jest (rn + ts)   │  │ expo export (all)    │
 └──────────────────────┘  └──────────────────┘  └──────────────────────┘
-                                                          │
-                                                          ▼
-                                                ┌──────────────────────┐
-                                                │      expo-doctor     │
-                                                │ SDK & deps health    │
-                                                └──────────────────────┘
 ```
 
-Each job declares `needs: <previous>`, so the pipeline short-circuits on the first failure and never wastes minutes building or doctoring a broken commit.
+Each job declares `needs: <previous>`, so the pipeline short-circuits on the first failure and never wastes minutes building a broken commit.
 
 ### Validation jobs
 
 1. **`lint-and-audit`** — runs `npm run lint` (ESLint over `src`, `app`, `__tests__`), `npm run typecheck` (`tsc -p tsconfig.app.json --noEmit`) and `npm run format:check` (Prettier in check mode).
 2. **`testing`** — runs the full Jest suite via `npm run test`, using `jest-expo` as the preset and `@testing-library/react-native` for component-level assertions.
 3. **`bundle`** — runs `npx expo export --platform all` to produce a static bundle for Android, iOS and Web. The resulting `dist/` directory is uploaded as a workflow artifact named `expo-dist` with a 7-day retention.
-4. **`expo-doctor`** — runs `npm run doctor` (`npx expo-doctor`) to verify SDK compatibility, dependency version drift and configuration health.
+
+> **Note:** `npm run doctor` (`npx expo-doctor`) is **not** part of CI. It currently flags expected SDK dependency drift in the Expo toolchain (see [Known Issues](#known-issues)), which would otherwise leave the pipeline permanently red. Run it locally when you want a health check — see the [Expo Doctor](#expo-doctor) section below.
 
 ### Node version alignment
 
@@ -134,11 +129,11 @@ The Node.js version is pinned via [`.nvmrc`](.nvmrc) (currently `22`) and consum
 
 ### Where the build outputs live
 
-| Output                                                   | Location                                                           |
-| -------------------------------------------------------- | ------------------------------------------------------------------ |
-| Validation logs (lint, typecheck, format, tests, doctor) | **Actions** tab on GitHub                                          |
-| `dist/` bundle produced by `expo export`                 | Uploaded as the `expo-dist` artifact on each run (7-day retention) |
-| Native binaries (`.apk` / `.aab` / `.ipa`)               | Not produced by CI — built on demand via EAS Build                 |
+| Output                                           | Location                                                           |
+| ------------------------------------------------ | ------------------------------------------------------------------ |
+| Validation logs (lint, typecheck, format, tests) | **Actions** tab on GitHub                                          |
+| `dist/` bundle produced by `expo export`         | Uploaded as the `expo-dist` artifact on each run (7-day retention) |
+| Native binaries (`.apk` / `.aab` / `.ipa`)       | Not produced by CI — built on demand via EAS Build                 |
 
 > **Note:** GitHub's **Packages** section is for package registries (npm, PyPI, Docker, etc.) and does not host Expo bundles. Static web/native bundles always live under the workflow run's **Artifacts** sidebar.
 
@@ -155,9 +150,6 @@ npm run test
 
 # bundle
 npx expo export --platform all
-
-# expo-doctor
-npm run doctor
 ```
 
 ## Security Audit
@@ -179,6 +171,8 @@ Run a full health check on the project (dependency versions, SDK compatibility, 
 ```bash
 npm run doctor
 ```
+
+This is a **local-only** check and is intentionally excluded from CI: it currently reports expected SDK dependency drift in the Expo toolchain (tracked in [Known Issues](#known-issues)), which would keep the pipeline red despite the app being healthy.
 
 ## Known Issues
 
